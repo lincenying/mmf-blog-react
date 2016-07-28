@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const About = React.createClass({
+export const Inbox = React.createClass({
     render() {
         return (
             <div>
-                这个是About
+                这个是inbox!
             </div>
         )
     }

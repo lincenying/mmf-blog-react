@@ -8,11 +8,11 @@ export const SimpleClicker = React.createClass({
         return (
             <div>
                 <span>You have clicked {this.state.times} times</span>
-                <button onClick={this.increment}>+1</button>
+                <button onClick={this.handleIncrement}>+1</button>
             </div>
         )
     },
-    increment() {
+    handleIncrement() {
         this.setState({
             times: this.state.times + 1
         })

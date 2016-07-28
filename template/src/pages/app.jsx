@@ -1,8 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router'
-import {Clicker} from '../components/clicker'
-import {SimpleClicker} from '../components/simpleclicker'
-
 import {DevTools} from '../components/devtools'
 
 export const App = React.createClass({
@@ -12,9 +9,19 @@ export const App = React.createClass({
                 display: 'flex',
                 flexDirection: 'column'
             }}>
-                <Clicker/>
-                <SimpleClicker/>
-                <Link to="/about">About</Link>
+                <h1>App</h1>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link to="/inbox">Inbox</Link>
+                    </li>
+                </ul>
+                {this.props.children}
                 <DevTools/>
             </div>
         )
