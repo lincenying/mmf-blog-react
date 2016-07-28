@@ -1,11 +1,5 @@
-import {
-    DevTools
-} from '../components/devtools'
-import {
-    createStore,
-    applyMiddleware,
-    compose
-} from 'redux'
+import {DevTools} from '../components/devtools'
+import {createStore,applyMiddleware,compose} from 'redux'
 import reducers from '../reducers'
 
 export function configureCounterStore(initialState, ...middlewares) {

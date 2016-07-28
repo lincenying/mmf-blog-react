@@ -12,6 +12,12 @@ const clicker = React.createClass({
         loading: PropTypes.number,
         message: PropTypes.string,
     },
+    componentDidMount() {
+        const {setloading} = this.props
+        setTimeout(() => {
+            setloading(1)
+        }, 100)
+    },
     handleSetLoadingShow() {
         const {setloading} = this.props
         setloading(1)
