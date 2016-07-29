@@ -116,7 +116,7 @@ module.exports = {
             'WithStatement',
         ],
         'no-return-assign': 1,
-        'no-script-url': 1,
+        'no-script-url': 0,
         'no-self-assign': 1,
         'no-self-compare': 1,
         'no-sequences': 1,

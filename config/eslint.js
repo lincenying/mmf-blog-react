@@ -133,7 +133,7 @@ module.exports = {
             'WithStatement',
         ],
         'no-return-assign': WARNING,
-        'no-script-url': WARNING,
+        'no-script-url': 0,
         'no-self-assign': WARNING,
         'no-self-compare': WARNING,
         'no-sequences': WARNING,
