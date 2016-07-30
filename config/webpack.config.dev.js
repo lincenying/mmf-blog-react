@@ -29,11 +29,10 @@ var indexHtmlPath = path.resolve(__dirname, relativePath, 'index.html');
 var faviconPath = path.resolve(__dirname, relativePath, 'favicon.ico');
 var buildPath = path.join(__dirname, isInNodeModules ? '../../..' : '..', 'build');
 
-module.exports = {
+var config = {
     devtool: 'eval',
     entry: {
         app: [
-            require.resolve('webpack-dev-server/client') + '?http://localhost:3000',
             require.resolve('webpack/hot/dev-server'),
             path.join(srcPath, 'index.jsx')
         ],
@@ -45,6 +44,9 @@ module.exports = {
         pathinfo: true,
         filename: '[name].js',
         publicPath: '/'
+    },
+    externals: {
+        'jquery': 'jQuery'
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -96,6 +98,17 @@ module.exports = {
             'process.env.NODE_ENV': '"development"'
         }),
         // Note: only CSS is currently hot reloaded
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        })
     ]
 };
+
+Object.keys(config.entry).forEach(function(name) {
+    config.entry[name] = ['./config/dev-client'].concat(config.entry[name])
+})
+
+module.exports = config;

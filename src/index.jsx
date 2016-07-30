@@ -8,20 +8,21 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import {configureCounterStore} from './store'
 import {NotFound} from './pages/404'
 import {App} from './pages/app'
-import {Main} from './pages/main'
-import {About} from './pages/about'
-import {Inbox} from './pages/inbox'
+import {Main} from './components/main'
 
 const store = configureCounterStore({}, thunk)
 const history = syncHistoryWithStore(browserHistory, store)
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}>
-                {/* 当 url 为/时渲染 Main */}
+            <Route name="index" path="/" component={App}>
                 <IndexRoute component={Main} />
-                <Route path="/about" component={About}/>
-                <Route path="/inbox" component={Inbox}/>
+            </Route>
+            <Route name="category" path="/category/:id" component={App}>
+                <IndexRoute component={Main} />
+            </Route>
+            <Route name="search" path="/search/:qs" component={App}>
+                <IndexRoute component={Main} />
             </Route>
             <Route path="*" component={NotFound}/>
         </Router>

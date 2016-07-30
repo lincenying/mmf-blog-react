@@ -1,10 +1,8 @@
 import {combineReducers} from 'redux'
 import {routerReducer} from 'react-router-redux'
-import {funcGlobal} from './globals'
-import {funcCounter} from './counter'
+import {article} from './article'
 
 export default combineReducers({
-    funcGlobal,
-    funcCounter,
+    article,
     routing: routerReducer,
 })

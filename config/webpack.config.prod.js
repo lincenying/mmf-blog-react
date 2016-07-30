@@ -19,7 +19,7 @@ var isInNodeModules = 'node_modules' ===
     path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relativePath = isInNodeModules ? '../../..' : '..';
 if (process.argv[2] === '--debug-template') {
-    relativePath = '../template';
+    relativePath = '..';
 }
 var srcPath = path.resolve(__dirname, relativePath, 'src');
 var nodeModulesPath = path.join(__dirname, '..', 'node_modules');
@@ -36,11 +36,14 @@ module.exports = {
     },
     output: {
         path: buildPath,
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[name].[chunkhash].chunk.js',
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].chunk.js',
         // TODO: this wouldn't work for e.g. GH Pages.
         // Good news: we can infer it from package.json :-)
         publicPath: '/'
+    },
+    externals: {
+        'jquery': 'jQuery'
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -73,6 +76,10 @@ module.exports = {
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
             loader: 'file',
+            query: {
+                limit: 10000,
+                name: 'img/[name].[hash:7].[ext]'
+            }
         }, {
             test: /\.(mp4|webm)$/,
             loader: 'url?limit=10000'
@@ -123,6 +130,11 @@ module.exports = {
                 screw_ie8: true
             }
         }),
-        new ExtractTextPlugin('[name].[contenthash].css')
+        new ExtractTextPlugin('css/[name].[contenthash].css'),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        })
     ]
 };
