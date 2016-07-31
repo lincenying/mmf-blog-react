@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-export const MainPost = React.createClass({
+export const MainItem = React.createClass({
     getInitialState: function() {
         return {showMore: 0}
     },

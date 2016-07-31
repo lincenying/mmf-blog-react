@@ -1,12 +1,26 @@
 import {
-    RECEIVE_POSTS
+    RECEIVE_POSTS, RECEIVE_ARTICLE, RECEIVE_COMMENT
 } from '../actions/article'
 
 const states = {
-    posts: [],
-    hasNext: 0,
-    page: 1,
-    pathname: ''
+    posts: {
+        list: [],
+        hasNext: 0,
+        page: 1,
+        pathname: ''
+    },
+    article: {
+        data: {},
+        next: {},
+        prev: {},
+        pathname: ''
+    },
+    comment: {
+        list: [],
+        hasNext: 0,
+        page: 1,
+        pathname: ''
+    }
 }
 
 export function article(state = states, action) {
@@ -19,10 +33,32 @@ export function article(state = states, action) {
                 posts = state.posts.concat(action.posts.list)
             }
             return Object.assign({}, state, {
-                posts,
-                page: action.page,
-                hasNext: action.posts.hasNext,
-                pathname: action.pathname
+                posts: {
+                    list: posts,
+                    page: action.page,
+                    hasNext: action.posts.hasNext,
+                    pathname: action.pathname
+                },
+            })
+        }
+        case RECEIVE_ARTICLE: {
+            return Object.assign({}, state, {
+                article: {
+                    data: action.json.data,
+                    prev: action.json.prev,
+                    next: action.json.next,
+                    pathname: action.pathname
+                },
+            })
+        }
+        case RECEIVE_COMMENT: {
+            return Object.assign({}, state, {
+                comment: {
+                    list: action.json.data.list,
+                    hasNext: action.json.data.hasNext,
+                    page: action.page,
+                    pathname: action.pathname
+                },
             })
         }
         default:

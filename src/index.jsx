@@ -9,6 +9,7 @@ import {configureCounterStore} from './store'
 import {NotFound} from './pages/404'
 import {App} from './pages/app'
 import {Main} from './components/main'
+import {Article} from './components/article'
 
 const store = configureCounterStore({}, thunk)
 const history = syncHistoryWithStore(browserHistory, store)
@@ -17,12 +18,9 @@ ReactDOM.render(
         <Router history={history}>
             <Route name="index" path="/" component={App}>
                 <IndexRoute component={Main} />
-            </Route>
-            <Route name="category" path="/category/:id" component={App}>
-                <IndexRoute component={Main} />
-            </Route>
-            <Route name="search" path="/search/:qs" component={App}>
-                <IndexRoute component={Main} />
+                <Route name="category" path="/category/:id" component={Main} />
+                <Route name="search" path="/search/:qs" component={Main} />
+                <Route name="article" path="/article/:id" component={Article} />
             </Route>
             <Route path="*" component={NotFound}/>
         </Router>

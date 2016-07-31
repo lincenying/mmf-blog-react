@@ -1,3 +1,5 @@
+import NProgress from 'nprogress'
+
 $.ajaxSetup({
     url: '/api/',
     global: true,
@@ -7,6 +9,12 @@ $.ajaxSetup({
         'X-Requested-With': 'XMLHttpRequest',
         'Authorization': 'Basic dGVzdDpwYXNzd2Q='
     }
+})
+$(document).ajaxStart(function() {
+    NProgress.start()
+})
+$(document).ajaxComplete(function() {
+    NProgress.done()
 })
 
 export default {

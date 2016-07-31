@@ -2,17 +2,15 @@ import React, {PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as articleActions from '../actions/article'
-import {MainPost} from "./main-post"
+import {MainItem} from "./main-item"
 
 export const main = React.createClass({
     propTypes: {
         fetchPosts: PropTypes.func,
-        posts: PropTypes.array,
-        page: PropTypes.number,
-        pathname: PropTypes.string,
+        posts: PropTypes.object
     },
     componentDidMount() {
-        let {pathname} = this.props
+        let {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchPosts()
     },
     componentDidUpdate(prevProps) {
@@ -33,14 +31,14 @@ export const main = React.createClass({
         })
     },
     handleLoadMore() {
-        const {page} = this.props
+        const {page} = this.props.posts
         this.handlefetchPosts(page + 1)
     },
     render() {
-        const {posts, hasNext} = this.props
-        const lists = posts.map((list, index) => {
+        const {list, hasNext} = this.props.posts
+        const lists = list.map((list, index) => {
             return (
-                <MainPost key={list._id} list={list}></MainPost>
+                <MainItem key={list._id} list={list}></MainItem>
             )
         })
         const loadMore = hasNext ? <a onClick={this.handleLoadMore} href="javascript:;">加载更多</a> : <span>好厉害, 竟然翻到最后一页了...</span>
@@ -61,10 +59,7 @@ export const main = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        posts: state.article.posts,
-        page: state.article.page,
-        hasNext: state.article.hasNext,
-        pathname: state.article.pathname,
+        posts: state.article.posts
     }
 }
 

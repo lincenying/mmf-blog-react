@@ -1,0 +1,77 @@
+import React, {PropTypes} from 'react'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import {Link} from 'react-router'
+import * as articleActions from '../actions/article'
+import {Comment} from './comment'
+
+export const article = React.createClass({
+    propTypes: {
+        fetchArticle: PropTypes.func,
+        article: PropTypes.object
+    },
+    componentDidMount() {
+        let {pathname} = this.props.article
+        if (pathname !== this.props.location.pathname) this.handlefetchArticle()
+    },
+    componentDidUpdate(prevProps) {
+        let pathname = this.props.location.pathname
+        let prevPathname = prevProps.location.pathname
+        if (pathname !== prevPathname) this.handlefetchArticle()
+    },
+    handlefetchArticle() {
+        const {fetchArticle, params: {id}, location: {pathname}} = this.props
+        fetchArticle({
+            action: 'article',
+            id,
+            pathname,
+            markdown: 1
+        })
+    },
+    render() {
+        const {article, location: {pathname}, params: {id}} = this.props
+        const prev = article.prev.prev_id ? <Link to={`/article/${article.prev.prev_id}`} className="prev">上一篇</Link> : <span className="prev">上一篇</span>
+        const next = article.next.next_id ? <Link to={`/article/${article.next.next_id}`} className="next">下一篇</Link> : <span className="next">上一篇</span>
+        return (
+            <div className="g-mn">
+                <div className="posts">
+                    <div className="m-post box article">
+                        <a href="javascript:;" className="w-icon w-icon-1">&nbsp;</a>
+                        <a href="javascript:;" className="w-icon2">&nbsp;</a>
+                        <div className="info">
+                            <a href="javascript:;">{ article.data.creat_date }</a>
+                            <a href="javascript:;">浏览: { article.data.visit }</a>
+                            <a href="javascript:;" className="comnum">{ article.data.comment_count }</a>
+                        </div>
+                        <div className="cont cont-1">
+                            <div className="text">
+                                <h2><Link to={`/article/${article.data._id}`}>{ article.data.title }</Link></h2>
+                                <div className="markdown-body" dangerouslySetInnerHTML={{__html: article.data.content}}></div>
+                            </div>
+                        </div>
+                        <div className="info info-1"></div>
+                    </div>
+                </div>
+                <div className="box m-page box-do">
+                    <div className="w-icon w-icon-2"></div>
+                    <div className="w-icon w-icon-3"></div>
+                    {prev}
+                    {next}
+                    <Comment pathname={pathname} id={id} />
+                </div>
+            </div>
+        )
+    }
+})
+
+function mapStateToProps(state) {
+    return {
+        article: state.article.article
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(articleActions, dispatch)
+}
+
+export const Article = connect(mapStateToProps, mapDispatchToProps)(article)

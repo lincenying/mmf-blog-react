@@ -5,7 +5,7 @@ import {Footer} from '../components/footer'
 import {Arrow} from '../components/arrow'
 import {DevTools} from '../components/devtools'
 import '../html/css/style.css'
-import '../html/css/hljs/googlecode.css'
+import '../html/css/nprogress.css'
 
 export const App = React.createClass({
     componentDidMount() {
