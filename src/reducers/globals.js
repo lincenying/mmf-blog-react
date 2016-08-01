@@ -1,19 +1,30 @@
 import {
-    INCREMENT_LOADING
-} from '../actions/counter'
+    INCREMENT_MESSAGE
+} from '../actions/globals'
 
-const globals = {
-    loading: 9,
-    message: '',
+const _globals = {
+    message: {
+        type: '',
+        content: '',
+        title: ''
+    }
 }
 
-export function funcGlobal(state = globals, action) {
+export function globals(state = _globals, action) {
     switch (action.type) {
-        case INCREMENT_LOADING:
+        case INCREMENT_MESSAGE: {
+            let message = action.message
+            if (typeof message === 'string') {
+                message = {
+                    type: 'success',
+                    title: '',
+                    content: message
+                }
+            }
             return Object.assign({}, state, {
-                loading: action.config === 1 ? 10 : 9,
-                message: action.config === 1 ? '显示' : '隐藏',
+                message: message
             })
+        }
         default:
             return state
     }

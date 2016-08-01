@@ -4,8 +4,11 @@ import {MenuFront} from '../components/menu-front'
 import {Footer} from '../components/footer'
 import {Arrow} from '../components/arrow'
 import {DevTools} from '../components/devtools'
+import {Toastr} from '../components/_toastr.jsx'
 import '../html/css/style.css'
 import '../html/css/nprogress.css'
+import '../html/css/animate.min.css'
+import '../html/css/toastr.min.css'
 
 export const App = React.createClass({
     componentDidMount() {
@@ -25,6 +28,7 @@ export const App = React.createClass({
                 <Footer />
                 <Arrow />
                 <DevTools />
+                <Toastr />
             </div>
         )
     }

@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import * as articleActions from '../actions/article'
+import * as globalsActions from '../actions/globals'
 import {Comment} from './comment'
 
 export const article = React.createClass({
@@ -71,7 +72,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(articleActions, dispatch)
+    const _Action = Object.assign({}, articleActions, globalsActions)
+    return bindActionCreators(_Action, dispatch)
 }
 
 export const Article = connect(mapStateToProps, mapDispatchToProps)(article)

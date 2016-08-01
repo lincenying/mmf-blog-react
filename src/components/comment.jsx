@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as articleActions from '../actions/article'
+import * as globalsActions from '../actions/globals'
 import {CommentItem} from "./comment-item"
 import api from '../api'
 
@@ -29,7 +30,7 @@ export const comment = React.createClass({
         })
     },
     handlePostComment() {
-        const {postComment, id} = this.props
+        const {postComment, setMessage, id} = this.props
         api.getData({
             action: 'postComment',
             id,
@@ -38,6 +39,7 @@ export const comment = React.createClass({
         }).then((json) => {
             postComment([json.data])
             this.setState({username: '', content: ''})
+            setMessage('发表评论成功!')
         })
     },
     handleLoadMore() {
@@ -97,7 +99,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(articleActions, dispatch)
+    const _Action = Object.assign({}, articleActions, globalsActions)
+    return bindActionCreators(_Action, dispatch)
 }
 
 export const Comment = connect(mapStateToProps, mapDispatchToProps)(comment)
