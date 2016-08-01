@@ -31,11 +31,19 @@ export const comment = React.createClass({
     },
     handlePostComment() {
         const {postComment, setMessage, id} = this.props
+        const {username, content} = this.state
+        if (this.state.content === '') {
+            setMessage({
+                type: 'error',
+                content: '请输入评论内容!'
+            })
+            return false
+        }
         api.getData({
             action: 'postComment',
             id,
-            content: this.state.content,
-            username: this.state.username
+            content,
+            username: username || '匿名用户'
         }).then((json) => {
             postComment([json.data])
             this.setState({username: '', content: ''})

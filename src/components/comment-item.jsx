@@ -4,11 +4,11 @@ export const CommentItem = React.createClass({
     getInitialState: function() {
         return {showMore: 0}
     },
-    handleOpen() {
-        this.setState({showMore: !this.state.showMore})
+    handleReply(val) {
+        $('#content').val('回复 '+ val +': ').focus()
     },
     render() {
-        const item = this.props.list
+        const {list} = this.props
         return (
             <li className="s-bd2 s-bg2">
                 <div className="bcmtlsta clearfix">
@@ -21,13 +21,13 @@ export const CommentItem = React.createClass({
                                 <div className="bcmtlstg">
                                     <div className="bcmtlsti">
                                         <div className="bcmtlstj">
-                                            <a className="s-fc2 itag bcmtlstk" href="javascript:;">{ item.username }</a>
+                                            <a className="s-fc2 itag bcmtlstk" href="javascript:;">{ list.username }</a>
                                             <span className="bcmtlstf s-fc4">：</span>
-                                            <span className="bcmtlstf s-fc4 itag">{ item.content }</span></div>
+                                            <span className="bcmtlstf s-fc4 itag">{ list.content }</span></div>
                                     </div>
                                 </div>
                                 <div className="bcmtlsth">
-                                    <a className="s-fc2 itag" href="javascript:;">删除</a><a className="s-fc2 itag" href="javascript:;">回复</a>
+                                    <a className="s-fc2 itag hidden" href="javascript:;">删除</a><a onClick={this.handleReply.bind(this, list.username)} className="s-fc2 itag" href="javascript:;">回复</a>
                                 </div>
                             </div>
                         </div>

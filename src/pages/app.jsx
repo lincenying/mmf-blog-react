@@ -11,12 +11,6 @@ import '../html/css/animate.min.css'
 import '../html/css/toastr.min.css'
 
 export const App = React.createClass({
-    componentDidMount() {
-
-    },
-    componentDidUpdate(prevProps) {
-
-    },
     render() {
         return (
             <div className="g-doc">

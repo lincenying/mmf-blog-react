@@ -849,6 +849,18 @@ textarea.form-control {
     z-index: 20
 }
 
+.beian {
+    float: right;
+}
+.beian i {
+    width: 14px;
+    height: 14px;
+    background: url(http://beian.gov.cn/img/ghs.png);
+    background-size: cover;
+    display: inline-block;
+    vertical-align: top;
+}
+
 .arrow {
     position: fixed;
     width: 50px;

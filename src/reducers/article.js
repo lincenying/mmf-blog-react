@@ -30,7 +30,7 @@ export function article(state = states, action) {
             if (action.page === 1) {
                 posts = [].concat(action.posts.list)
             } else {
-                posts = state.posts.concat(action.posts.list)
+                posts = state.posts.list.concat(action.posts.list)
             }
             return Object.assign({}, state, {
                 posts: {

@@ -10,9 +10,9 @@ export const Arrow = React.createClass({
         )
     },
     handleGoTop() {
-        return ''
+        window.scrollTo(0, 0)
     },
     handleGoBack() {
-        return ''
+        window.history.go(-1)
     }
 })
