@@ -22,15 +22,12 @@ export const CommentItem = React.createClass({
                                     <div className="bcmtlsti">
                                         <div className="bcmtlstj">
                                             <a className="s-fc2 itag bcmtlstk" href="javascript:;">{ item.username }</a>
-                                            <span className="s-fc3 itag">回复了&nbsp;&nbsp;
-                                                <a href="javascript:;" className="s-fc2 itag">{ item.reply_user }</a>
-                                            </span>
                                             <span className="bcmtlstf s-fc4">：</span>
                                             <span className="bcmtlstf s-fc4 itag">{ item.content }</span></div>
                                     </div>
                                 </div>
                                 <div className="bcmtlsth">
-                                    <a className="s-fc2 itag" href="javascript:;" style="visibility: hidden;">删除</a><a className="s-fc2 itag" href="javascript:;">回复</a>
+                                    <a className="s-fc2 itag" href="javascript:;">删除</a><a className="s-fc2 itag" href="javascript:;">回复</a>
                                 </div>
                             </div>
                         </div>

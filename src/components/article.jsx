@@ -57,8 +57,8 @@ export const article = React.createClass({
                     <div className="w-icon w-icon-3"></div>
                     {prev}
                     {next}
-                    <Comment pathname={pathname} id={id} />
                 </div>
+                <Comment pathname={pathname} id={id} />
             </div>
         )
     }

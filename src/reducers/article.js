@@ -1,5 +1,5 @@
 import {
-    RECEIVE_POSTS, RECEIVE_ARTICLE, RECEIVE_COMMENT
+    RECEIVE_POSTS, RECEIVE_ARTICLE, RECEIVE_COMMENT, POST_COMMENT
 } from '../actions/article'
 
 const states = {
@@ -52,13 +52,27 @@ export function article(state = states, action) {
             })
         }
         case RECEIVE_COMMENT: {
+            let lists
+            if (action.page === 1) {
+                lists = [].concat(action.json.data.list)
+            } else {
+                lists = state.comment.list.concat(action.json.data.list)
+            }
             return Object.assign({}, state, {
                 comment: {
-                    list: action.json.data.list,
+                    list: lists,
                     hasNext: action.json.data.hasNext,
                     page: action.page,
                     pathname: action.pathname
                 },
+            })
+        }
+        case POST_COMMENT: {
+            const lists = action.data.concat(state.comment.list)
+            return Object.assign({}, state, {
+                comment: {
+                    list: lists
+                }
             })
         }
         default:

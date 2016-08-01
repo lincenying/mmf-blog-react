@@ -2,36 +2,66 @@ import React, {PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as articleActions from '../actions/article'
-import {CommentItem} from "./main-item"
+import {CommentItem} from "./comment-item"
+import api from '../api'
 
 export const comment = React.createClass({
     propTypes: {
         fetchComment: PropTypes.func,
+        postComment: PropTypes.func,
         comment: PropTypes.object
     },
-    componentDidMount() {
-        console.log(this.props)
-        this.handlefetchComment()
+    getInitialState: function() {
+        return {
+            username: '',
+            content: ''
+        };
     },
-    handlefetchComment(page = 1) {
-        const {fetchComment} = this.props
+    componentDidMount() {
+        this._fetchComment()
+    },
+    _fetchComment(page = 1) {
+        const {fetchComment, id} = this.props
         fetchComment({
             action: 'comment',
-            id: 1,
+            id,
             page
+        })
+    },
+    handlePostComment() {
+        const {postComment, id} = this.props
+        api.getData({
+            action: 'postComment',
+            id,
+            content: this.state.content,
+            username: this.state.username
+        }).then((json) => {
+            postComment([json.data])
+            this.setState({username: '', content: ''})
         })
     },
     handleLoadMore() {
         const {page} = this.props.comment
-        this.handlefetchComment(page + 1)
+        this._fetchComment(page + 1)
+    },
+    handleChangeUsername(event) {
+        this.setState({username: event.target.value})
+    },
+    handleChangeContent(event) {
+        this.setState({content: event.target.value})
     },
     render() {
-        const {list} = this.props.comment
+        const {list, hasNext} = this.props.comment
         const lists = list.map((list, index) => {
             return (
                 <CommentItem key={list._id} list={list}></CommentItem>
             )
         })
+        const more = hasNext ? (
+            <div className="bcmtmore s-bd2">
+                <div className="bcmtlsta"><a onClick={this.handleLoadMore} href="javascript:;" className="s-fc2 ztag">查看更多</a></div>
+            </div>
+        ) : ''
         return (
             <div className="box">
                 <div className="comment">
@@ -39,11 +69,11 @@ export const comment = React.createClass({
                     <div className="bcmt">
                         <div className="s-fc0 ztag ztag_tips">由于该用户的权限设置，您暂时无法进行评论...</div>
                         <div className="bcmtadd">
-                            <input type="text" className="form-control" placeholder="请输入昵称" />
-                            <textarea id="content" className="form-control" placeholder="请输入评论内容"></textarea>
+                            <input value={this.state.username} onChange={this.handleChangeUsername} type="text" className="form-control" placeholder="请输入昵称" />
+                            <textarea value={this.state.content} onChange={this.handleChangeContent} id="content" className="form-control" placeholder="请输入评论内容"></textarea>
                             <div className="bcmtbtn">
                                 <span className="ztag ztag_tips">提示</span>
-                                <button className="s-bd1 s-fc1 s-bg1 ztag">发布</button>
+                                <button onClick={this.handlePostComment} className="s-bd1 s-fc1 s-bg1 ztag">发布</button>
                                 <div className="txt s-fc0"></div>
                             </div>
                         </div>
@@ -52,12 +82,7 @@ export const comment = React.createClass({
                                 { lists }
                             </ul>
                         </div>
-                        <div className="bcmtmore s-bd2 ztag">
-                            <div className="bcmtlsta"><span className="s-fc4">正在载入中...</span></div>
-                        </div>
-                        <div className="bcmtmore s-bd2">
-                            <div className="bcmtlsta"><a href="javascript:;" className="s-fc2 ztag">查看更多</a></div>
-                        </div>
+                        {more}
                     </div>
                 </div>
             </div>

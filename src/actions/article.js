@@ -3,6 +3,7 @@ import api from '../api'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
+export const POST_COMMENT = 'POST_COMMENT'
 
 function receivePosts(page, pathname, json) {
     return {
@@ -46,5 +47,12 @@ function receiveComment(json, pathname, page) {
 export function fetchComment(config) {
     return (dispatch, getState) => {
         return api.getFromConfig(config).then(json => dispatch(receiveComment(json, config.pathname, config.page)))
+    }
+}
+
+export function postComment(data) {
+    return {
+        type: POST_COMMENT,
+        data
     }
 }
