@@ -36,6 +36,7 @@
         "fs-extra": "^0.30.0",
         "fsevents": "1.0.14",
         "html-webpack-plugin": "2.22.0",
+        "http-proxy-middleware": "^0.17.0",
         "isomorphic-fetch": "^2.2.1",
         "json-loader": "0.5.4",
         "opn": "4.0.2",
@@ -44,7 +45,8 @@
         "style-loader": "0.13.1",
         "url-loader": "0.5.7",
         "webpack": "1.13.1",
-        "webpack-dev-server": "1.14.1"
+        "webpack-dev-server": "1.14.1",
+        "webpack-hot-middleware": "^2.12.2"
     },
     "devDependencies": {
         "bundle-deps": "^1.0.0",
