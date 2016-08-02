@@ -6,7 +6,7 @@ import * as articleActions from '../actions/article'
 import * as globalsActions from '../actions/globals'
 import {Comment} from './comment'
 
-export const article = React.createClass({
+const article = React.createClass({
     propTypes: {
         fetchArticle: PropTypes.func,
         article: PropTypes.object

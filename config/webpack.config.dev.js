@@ -72,7 +72,6 @@ var config = {
             query: require('./babel.dev')
         }, {
             test: /\.css$/,
-            include: srcPath,
             loader: 'style!css!postcss'
         }, {
             test: /\.json$/,
@@ -102,7 +101,7 @@ var config = {
         new HtmlWebpackPlugin({
             chunks: ['vendor', 'login'],
             filename: 'login.html',
-            template: 'index.html',
+            template: 'login.html',
             inject: true
         }),
         new webpack.DefinePlugin({

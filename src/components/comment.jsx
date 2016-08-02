@@ -6,7 +6,7 @@ import * as globalsActions from '../actions/globals'
 import {CommentItem} from "./comment-item"
 import api from '../api'
 
-export const comment = React.createClass({
+const comment = React.createClass({
     propTypes: {
         fetchComment: PropTypes.func,
         postComment: PropTypes.func,

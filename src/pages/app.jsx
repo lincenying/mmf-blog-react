@@ -14,7 +14,7 @@ import '../html/css/toastr.min.css'
 export const App = React.createClass({
     render() {
         const {route: {needLogin}} = this.props
-        const menu = needLogin ? <MenuAdmin /> : <MenuFront />
+        const menu = needLogin === "1" ? <MenuAdmin /> : <MenuFront />
         return (
             <div className="g-doc">
                 <div className="g-hd">

@@ -5,7 +5,7 @@ import {Link} from 'react-router'
 import * as adminActions from '../actions/admin'
 import * as globalsActions from '../actions/globals'
 
-export const admin_article_list = React.createClass({
+const admin_article_list = React.createClass({
     propTypes: {
         fetchAdminArticle: PropTypes.func,
         deleteArticle: PropTypes.func,

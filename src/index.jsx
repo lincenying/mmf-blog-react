@@ -4,16 +4,26 @@ import thunk from 'redux-thunk'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import {Provider} from 'react-redux'
 import {syncHistoryWithStore} from 'react-router-redux'
-
 import {configureCounterStore} from './store'
+import cookies from 'js-cookie'
+
 import {NotFound} from './pages/404'
 import {App} from './pages/app'
 import {Main} from './components/main'
 import {Article} from './components/article'
 import {AdminArticleList} from './components/admin-list'
+import {AdminArticlePost} from './components/admin-post'
 
 const store = configureCounterStore({}, thunk)
 const history = syncHistoryWithStore(browserHistory, store)
+const checkLogin = (nextState, replace, callback) => {
+    var token = cookies.get('user')
+    if (!token) {
+        replace('/')
+    }
+    callback()
+}
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
@@ -23,9 +33,9 @@ ReactDOM.render(
                 <Route name="search" path="/search/:qs" component={Main} />
                 <Route name="article" path="/article/:id" component={Article} />
             </Route>
-            <Route name="admin" needLogin="1" path="/admin" component={App}>
+            <Route onEnter={checkLogin} name="admin" needLogin="1" path="/admin" component={App}>
                 <Route name="list" path="/admin/list(/:page)" component={AdminArticleList} />
-                <Route name="post" path="/admin/post" component={Main} />
+                <Route name="post" path="/admin/post" component={AdminArticlePost} />
                 <Route name="post" path="/admin/edit/:id/:page" component={Main} />
             </Route>
             <Route path="*" component={NotFound}/>

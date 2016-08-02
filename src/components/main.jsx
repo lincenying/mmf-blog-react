@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import * as articleActions from '../actions/article'
 import {MainItem} from "./main-item"
 
-export const main = React.createClass({
+const main = React.createClass({
     propTypes: {
         fetchPosts: PropTypes.func,
         posts: PropTypes.object

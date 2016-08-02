@@ -97,7 +97,28 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             inject: true,
-            template: indexHtmlPath,
+            chunks: ['vendor', 'polyfill', 'app'],
+            filename: 'index.html',
+            template: 'index.html',
+            favicon: faviconPath,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: ['vendor', 'login'],
+            filename: 'login.html',
+            template: 'login.html',
             favicon: faviconPath,
             minify: {
                 removeComments: true,
