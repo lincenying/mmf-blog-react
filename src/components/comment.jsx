@@ -54,11 +54,8 @@ export const comment = React.createClass({
         const {page} = this.props.comment
         this._fetchComment(page + 1)
     },
-    handleChangeUsername(event) {
-        this.setState({username: event.target.value})
-    },
-    handleChangeContent(event) {
-        this.setState({content: event.target.value})
+    handleChange(type, event) {
+        this.setState({[type]: event.target.value})
     },
     render() {
         const {list, hasNext} = this.props.comment
@@ -79,8 +76,8 @@ export const comment = React.createClass({
                     <div className="bcmt">
                         <div className="s-fc0 ztag ztag_tips">由于该用户的权限设置，您暂时无法进行评论...</div>
                         <div className="bcmtadd">
-                            <input value={this.state.username} onChange={this.handleChangeUsername} type="text" className="form-control" placeholder="请输入昵称" />
-                            <textarea value={this.state.content} onChange={this.handleChangeContent} id="content" className="form-control" placeholder="请输入评论内容"></textarea>
+                            <input value={this.state.username} onChange={this.handleChange.bind(this, 'username')} type="text" className="form-control" placeholder="请输入昵称" />
+                            <textarea value={this.state.content} onChange={this.handleChange.bind(this, 'content')} id="content" className="form-control" placeholder="请输入评论内容"></textarea>
                             <div className="bcmtbtn">
                                 <span className="ztag ztag_tips">提示</span>
                                 <button onClick={this.handlePostComment} className="s-bd1 s-fc1 s-bg1 ztag">发布</button>

@@ -14,9 +14,9 @@ export const MenuFront = React.createClass({
                 <div className="m-nav">
                     <ul className="menuOpen">
                         <li className="tag-all"><Link activeClassName="v-link-active" to="/"><i></i>All</Link></li>
-                        <li className="tag-life"><Link activeClassName="v-link-active" to={`/1`}><i></i>Life</Link></li>
-                        <li className="tag-study"><Link activeClassName="v-link-active" to={`/2`}><i></i>Study</Link></li>
-                        <li className="tag-other"><Link activeClassName="v-link-active" to={`/3`}><i></i>Other</Link></li>
+                        <li className="tag-life"><Link activeClassName="v-link-active" to={`/category/1`}><i></i>Life</Link></li>
+                        <li className="tag-study"><Link activeClassName="v-link-active" to={`/category/2`}><i></i>Study</Link></li>
+                        <li className="tag-other"><Link activeClassName="v-link-active" to={`/category/3`}><i></i>Other</Link></li>
                     </ul>
                 </div>
             </div>

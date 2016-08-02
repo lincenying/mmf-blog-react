@@ -21,7 +21,7 @@ var isInDebugMode = process.argv.some(arg =>
     arg.indexOf('--debug-template') > -1
 );
 if (isInDebugMode) {
-    relativePath = '../template';
+    relativePath = '..';
 }
 var srcPath = path.resolve(__dirname, relativePath, 'src');
 var nodeModulesPath = path.join(__dirname, '..', 'node_modules');
@@ -35,6 +35,10 @@ var config = {
         app: [
             require.resolve('webpack/hot/dev-server'),
             path.join(srcPath, 'index.jsx')
+        ],
+        login: [
+            require.resolve('webpack/hot/dev-server'),
+            path.join(srcPath, 'login.jsx')
         ],
         vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux']
     },
@@ -90,9 +94,16 @@ var config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            inject: true,
-            template: indexHtmlPath,
-            favicon: faviconPath,
+            chunks: ['vendor', 'polyfill', 'app'],
+            filename: 'index.html',
+            template: 'index.html',
+            inject: true
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['vendor', 'login'],
+            filename: 'login.html',
+            template: 'index.html',
+            inject: true
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"development"'
