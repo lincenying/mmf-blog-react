@@ -1,5 +1,5 @@
 import {
-    RECEIVE_ADMIN_POSTS, RECEIVE_ADMIN_ARTICLE
+    RECEIVE_ADMIN_POSTS, RECEIVE_ADMIN_ARTICLE, RCOVER_ARTICLE, DELETE_ARTICLE
 } from '../actions/admin'
 
 const states = {
@@ -40,6 +40,28 @@ export function admin(state = states, action) {
                 article: {
                     data: action.json.data,
                     pathname: action.pathname
+                },
+            })
+        }
+        case RCOVER_ARTICLE: {
+            let list = state.posts.list
+            const obj = list.find(ii => action.id === ii._id)
+            obj.is_delete = "0"
+            return Object.assign({}, state, {
+                posts: {
+                    ...state.posts,
+                    list: list
+                },
+            })
+        }
+        case DELETE_ARTICLE: {
+            let list = state.posts.list
+            const obj = list.find(ii => action.id === ii._id)
+            obj.is_delete = "1"
+            return Object.assign({}, state, {
+                posts: {
+                    ...state.posts,
+                    list: list
                 },
             })
         }

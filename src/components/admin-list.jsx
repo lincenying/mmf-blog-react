@@ -8,6 +8,7 @@ import * as globalsActions from '../actions/globals'
 export const admin_article_list = React.createClass({
     propTypes: {
         fetchAdminArticle: PropTypes.func,
+        deleteArticle: PropTypes.func,
         posts: PropTypes.object
     },
     componentDidMount() {
@@ -29,10 +30,18 @@ export const admin_article_list = React.createClass({
         })
     },
     handleDeleteArticle(id) {
-
+        const {deleteArticle} = this.props
+        deleteArticle({
+            action: 'delete',
+            id
+        })
     },
     handleRecoverArticle(id) {
-
+        const {recoverArticle} = this.props
+        recoverArticle({
+            action: 'recover',
+            id
+        })
     },
     render() {
         const { posts } = this.props
@@ -59,12 +68,8 @@ export const admin_article_list = React.createClass({
                 <div className="box m-page box-do">
                     <div className="w-icon w-icon-2"></div>
                     <div className="w-icon w-icon-3"></div>
-                    {
-                        posts.hasPrev ? <Link to={`/admin/list/${posts.page - 1}`} className="prev">上一页</Link> : ''
-                    }
-                    {
-                        posts.hasNext ? <Link to={`/admin/list/${posts.page + 1}`} className="next">下一页</Link> : ''
-                    }
+                    { posts.hasPrev ? <Link to={`/admin/list/${posts.page - 1}`} className="prev">上一页</Link> : '' }
+                    { posts.hasNext ? <Link to={`/admin/list/${posts.page + 1}`} className="next">下一页</Link> : '' }
                 </div>
             </div>
         )
