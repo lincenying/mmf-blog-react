@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux'
 import {routerReducer} from 'react-router-redux'
-import {article} from './article'
 import {globals} from './globals'
+import {article} from './article'
+import {admin} from './admin'
 
 export default combineReducers({
-    article,
     globals,
+    article,
+    admin,
     routing: routerReducer,
 })

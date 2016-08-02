@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 export const MenuAdmin = React.createClass({
     render() {
@@ -6,9 +7,9 @@ export const MenuAdmin = React.createClass({
             <div className="box menu">
                 <div className="m-nav">
                     <ul className="menuOpen">
-                        <li className="tag-all"><a v-link="{ name: 'index', exact: true}"><i></i>All</a></li>
-                        <li className="tag-life"><a v-link="{ name: 'adminList', params: { page: 1 }}"><i></i>List</a></li>
-                        <li className="tag-study"><a v-link="{ name: 'adminPost'}"><i></i>Post</a></li>
+                        <li className="tag-all"><Link activeClassName="v-link-active" to="/" onlyActiveOnIndex={true}><i></i>All</Link></li>
+                        <li className="tag-life"><Link activeClassName="v-link-active" to={`/admin/list/1`}><i></i>List</Link></li>
+                        <li className="tag-study"><Link activeClassName="v-link-active" to={`/admin/post`}><i></i>Post</Link></li>
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import {About} from '../components/about'
 import {MenuFront} from '../components/menu-front'
+import {MenuAdmin} from '../components/menu-admin'
 import {Footer} from '../components/footer'
 import {Arrow} from '../components/arrow'
 import {DevTools} from '../components/devtools'
@@ -12,11 +13,13 @@ import '../html/css/toastr.min.css'
 
 export const App = React.createClass({
     render() {
+        const {route: {needLogin}} = this.props
+        const menu = needLogin ? <MenuAdmin /> : <MenuFront />
         return (
             <div className="g-doc">
                 <div className="g-hd">
                     <About></About>
-                    <MenuFront />
+                    {menu}
                 </div>
                 { this.props.children }
                 <Footer />
