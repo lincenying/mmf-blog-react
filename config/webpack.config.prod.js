@@ -36,8 +36,8 @@ module.exports = {
     },
     output: {
         path: buildPath,
-        filename: 'js/[name].[chunkhash].js',
-        chunkFilename: 'js/[name].[chunkhash].chunk.js',
+        filename: 'static/js/[name].[chunkhash].js',
+        chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
         // TODO: this wouldn't work for e.g. GH Pages.
         // Good news: we can infer it from package.json :-)
         publicPath: '/'
@@ -78,7 +78,7 @@ module.exports = {
             loader: 'file',
             query: {
                 limit: 10000,
-                name: 'img/[name].[hash:7].[ext]'
+                name: 'static/img/[name].[hash:7].[ext]'
             }
         }, {
             test: /\.(mp4|webm)$/,
@@ -151,7 +151,7 @@ module.exports = {
                 screw_ie8: true
             }
         }),
-        new ExtractTextPlugin('css/[name].[contenthash].css'),
+        new ExtractTextPlugin('static/css/[name].[contenthash].css'),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
