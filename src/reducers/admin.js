@@ -19,15 +19,9 @@ const states = {
 export function admin(state = states, action) {
     switch (action.type) {
         case RECEIVE_ADMIN_POSTS: {
-            let posts
-            if (action.page === 1) {
-                posts = [].concat(action.posts.list)
-            } else {
-                posts = state.posts.list.concat(action.posts.list)
-            }
             return Object.assign({}, state, {
                 posts: {
-                    list: posts,
+                    list: action.posts.list,
                     page: parseInt(action.page, 10),
                     hasNext: action.posts.hasNext,
                     hasPrev: action.posts.hasPrev,

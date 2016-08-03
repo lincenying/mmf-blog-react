@@ -88,7 +88,7 @@ const admin_article_post = React.createClass({
                             </select>
                         </section>
                         <section id="post-content">
-                            <textarea value={this.state.content} onChange={this.handleChange.bind(this, 'content')} id="editor" name="content" className="form-control hidden" data-autosave="editor-content"></textarea>
+                            <textarea id="editor" name="content" className="form-control hidden" data-autosave="editor-content"></textarea>
                         </section>
                         <section id="post-submit">
                             <input type="hidden" name="action" value="post" />

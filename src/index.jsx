@@ -13,6 +13,7 @@ import {Main} from './components/main'
 import {Article} from './components/article'
 import {AdminArticleList} from './components/admin-list'
 import {AdminArticlePost} from './components/admin-post'
+import {AdminArticleEdit} from './components/admin-edit'
 
 const store = configureCounterStore({}, thunk)
 const history = syncHistoryWithStore(browserHistory, store)
@@ -36,7 +37,7 @@ ReactDOM.render(
             <Route onEnter={checkLogin} name="admin" needLogin="1" path="/admin" component={App}>
                 <Route name="list" path="/admin/list(/:page)" component={AdminArticleList} />
                 <Route name="post" path="/admin/post" component={AdminArticlePost} />
-                <Route name="post" path="/admin/edit/:id/:page" component={Main} />
+                <Route name="post" path="/admin/edit/:id/:page" component={AdminArticleEdit} />
             </Route>
             <Route path="*" component={NotFound}/>
         </Router>
