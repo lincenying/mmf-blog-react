@@ -32,7 +32,7 @@ const article = React.createClass({
     render() {
         const {article, location: {pathname}, params: {id}} = this.props
         const prev = article.prev.prev_id ? <Link to={`/article/${article.prev.prev_id}`} className="prev">上一篇</Link> : <span className="prev">上一篇</span>
-        const next = article.next.next_id ? <Link to={`/article/${article.next.next_id}`} className="next">下一篇</Link> : <span className="next">上一篇</span>
+        const next = article.next.next_id ? <Link to={`/article/${article.next.next_id}`} className="next">下一篇</Link> : <span className="next">下一篇</span>
         return (
             <div className="g-mn">
                 <div className="posts">
