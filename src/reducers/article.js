@@ -18,8 +18,7 @@ const states = {
     comment: {
         list: [],
         hasNext: 0,
-        page: 1,
-        pathname: ''
+        page: 1
     }
 }
 
@@ -62,8 +61,7 @@ export function article(state = states, action) {
                 comment: {
                     list: lists,
                     hasNext: action.json.data.hasNext,
-                    page: action.page,
-                    pathname: action.pathname
+                    page: action.page
                 },
             })
         }

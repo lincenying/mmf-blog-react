@@ -30,25 +30,26 @@ const comment = React.createClass({
         })
     },
     handlePostComment() {
-        const {postComment, setMessage, id} = this.props
-        const {username, content} = this.state
-        if (this.state.content === '') {
-            setMessage({
-                type: 'error',
-                content: '请输入评论内容!'
+        (async () => {
+            const {postComment, setMessage, id} = this.props
+            const {username, content} = this.state
+            if (this.state.content === '') {
+                setMessage({
+                    type: 'error',
+                    content: '请输入评论内容!'
+                })
+                return false
+            }
+            const json = await api.getData({
+                action: 'postComment',
+                id,
+                content,
+                username: username || '匿名用户'
             })
-            return false
-        }
-        api.getData({
-            action: 'postComment',
-            id,
-            content,
-            username: username || '匿名用户'
-        }).then((json) => {
             postComment([json.data])
             this.setState({username: '', content: ''})
             setMessage('发表评论成功!')
-        })
+        })()
     },
     handleLoadMore() {
         const {page} = this.props.comment

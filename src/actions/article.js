@@ -35,18 +35,17 @@ export function fetchArticle(config) {
     }
 }
 
-function receiveComment(json, pathname, page) {
+function receiveComment(json, page) {
     return {
         type: RECEIVE_COMMENT,
         json,
-        page,
-        pathname
+        page
     }
 }
 
 export function fetchComment(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(receiveComment(json, config.pathname, config.page)))
+        return api.getFromConfig(config).then(json => dispatch(receiveComment(json, config.page)))
     }
 }
 
