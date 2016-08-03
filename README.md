@@ -27,9 +27,8 @@ http://localhost:3000/admin
 http://localhost:3000/login
 
 #### 使用开发模式访问:
-
-添加管理员
-http://localhost:8000/admin
+首页
+http://localhost:8080
 
 登录
-http://localhost:8000/login
+http://localhost:8080/login.html
