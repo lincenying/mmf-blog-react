@@ -1,4 +1,5 @@
 var express = require('express')
+var compression = require('compression')
 var mongoose = require('mongoose')
 var path = require('path')
 var favicon = require('serve-favicon')
@@ -21,6 +22,7 @@ app.set('views', path.join(__dirname, 'build'))
 app.engine('.html', require('ejs').__express)
 app.set('view engine', 'ejs')
 
+app.use(compression())
 app.use(favicon(path.join(__dirname, 'build') + '/favicon.ico'))
 app.use(logger('dev'))
 app.use(bodyParser.json())
