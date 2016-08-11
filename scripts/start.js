@@ -77,7 +77,7 @@ compiler.plugin('done', function(stats) {
     if (!hasErrors && !hasWarnings) {
         console.log(chalk.green('Compiled successfully!'));
         console.log();
-        console.log('The app is running at http://localhost:3000/');
+        console.log('The app is running at http://localhost:8080/');
         console.log();
         return;
     }
@@ -130,7 +130,7 @@ function openBrowser() {
             execSync(
                 'osascript ' +
                 path.resolve(__dirname, './openChrome.applescript') +
-                ' http://localhost:3000/'
+                ' http://localhost:8080/'
             );
             return;
         } catch (err) {
@@ -139,15 +139,22 @@ function openBrowser() {
     }
     // Fallback to opn
     // (It will always open new tab)
-    opn('http://localhost:3000/');
+    opn('http://localhost:8080/');
 }
 
 new WebpackDevServer(compiler, {
     historyApiFallback: true,
     hot: true, // Note: only CSS is currently hot reloaded
     publicPath: config.output.publicPath,
-    quiet: true
-}).listen(3000, 'localhost', function(err, result) {
+    quiet: true,
+    proxy: {
+        '/api/**': {
+            target: 'http://localhost:3000/',
+            secure: false,
+            changeOrigin: true
+        }
+    }
+}).listen(8080, 'localhost', function(err, result) {
     if (err) {
         return console.log(err);
     }
