@@ -33,11 +33,9 @@ var config = {
     devtool: 'eval',
     entry: {
         app: [
-            require.resolve('webpack/hot/dev-server'),
             path.join(srcPath, 'index.jsx')
         ],
         login: [
-            require.resolve('webpack/hot/dev-server'),
             path.join(srcPath, 'login.jsx')
         ],
         vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux']

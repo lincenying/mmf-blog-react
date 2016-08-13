@@ -32,6 +32,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         app: path.join(srcPath, 'index'),
+        login: path.join(srcPath, 'login'),
         vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux']
     },
     output: {

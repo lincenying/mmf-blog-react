@@ -23,6 +23,10 @@ npm run server
 
 // 启动 开发模式
 npm run dev
+
+或者
+
+npm run start
 ```
 #### 使用api服务器访问:
 
