@@ -69,6 +69,7 @@ export function article(state = states, action) {
             const lists = action.data.concat(state.comment.list)
             return Object.assign({}, state, {
                 comment: {
+                    ...state.comment,
                     list: lists
                 }
             })
