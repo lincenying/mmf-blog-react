@@ -3,6 +3,8 @@
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+var proxyConfig = require('../proxy')
+
 var config = {
     build: {
         index: path.resolve(__dirname, 'dist/index.html'),
@@ -13,15 +15,7 @@ var config = {
     },
     dev: {
         port: 8080,
-        proxyTable: {
-            '/api': {
-                target: 'http://localhost:3000',
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api': '/api'
-                }
-            }
-        }
+        proxyTable: proxyConfig
     }
 }
 var proxyMiddleware = require('http-proxy-middleware')
