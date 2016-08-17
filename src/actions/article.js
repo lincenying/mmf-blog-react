@@ -5,47 +5,45 @@ export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 export const POST_COMMENT = 'POST_COMMENT'
 
-function receivePosts(page, pathname, json) {
+function receivePosts(config) {
     return {
         type: RECEIVE_POSTS,
-        page,
-        pathname,
-        posts: json,
-        receivedAt: Date.now()
+        ...config
     }
 }
 
 export function fetchPosts(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(receivePosts(config.page, config.pathname, json.data)))
+        return api.getFromConfig(config).then(json => dispatch(receivePosts({posts: json.data, ...config})))
     }
 }
 
-function receiveArticle(json, pathname) {
+function receiveArticle(config) {
     return {
         type: RECEIVE_ARTICLE,
-        json,
-        pathname
+        ...config
     }
 }
 
 export function fetchArticle(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(receiveArticle(json, config.pathname)))
+        return api.getFromConfig(config).then(json => dispatch(receiveArticle({json, ...config})))
     }
 }
 
-function receiveComment(json, page) {
+function receiveComment(config) {
     return {
         type: RECEIVE_COMMENT,
-        json,
-        page
+        ...config
     }
 }
 
 export function fetchComment(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(receiveComment(json, config.page)))
+        return api.getFromConfig(config).then(json => dispatch(receiveComment({
+            json,
+            ...config
+        })))
     }
 }
 

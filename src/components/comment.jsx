@@ -17,17 +17,18 @@ class comment extends Component {
         this.handleLoadMore = this.handleLoadMore.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
-    componentDidMount() {
-        this._fetchComment()
+    componentWillMount() {
+        let {pathname} = this.props.comment
+        if (pathname !== this.props.pathname) this._fetchComment()
     }
-    componentDidUpdate(prevProps) {
+    componentWillUpdate(prevProps) {
         let pathname = this.props.pathname
         let prevPathname = prevProps.pathname
         if (pathname !== prevPathname) this._fetchComment()
     }
     _fetchComment(page = 1) {
-        const {fetchComment, id} = this.props
-        fetchComment({action: 'comment', id, page})
+        const {fetchComment, id, pathname} = this.props
+        fetchComment({action: 'comment', id, page, pathname})
     }
     async handlePostComment() {
         const {postComment, setMessage, id} = this.props

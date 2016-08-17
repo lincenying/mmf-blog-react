@@ -18,61 +18,60 @@ const states = {
     comment: {
         list: [],
         hasNext: 0,
-        page: 1
+        page: 1,
+        pathname: ''
     }
 }
 
 export function article(state = states, action) {
     switch (action.type) {
         case RECEIVE_POSTS: {
-            let posts
-            if (action.page === 1) {
-                posts = [].concat(action.posts.list)
-            } else {
-                posts = state.posts.list.concat(action.posts.list)
-            }
-            return Object.assign({}, state, {
+            const {posts: { list, hasNext }, page, pathname} = action
+            let lists = page === 1 ? [].concat(list) : state.posts.list.concat(list)
+            return {
+                ...state,
                 posts: {
-                    list: posts,
-                    page: action.page,
-                    hasNext: action.posts.hasNext,
-                    pathname: action.pathname
-                },
-            })
+                    list: lists,
+                    page,
+                    hasNext,
+                    pathname
+                }
+            }
         }
         case RECEIVE_ARTICLE: {
-            return Object.assign({}, state, {
+            const {json: { data, prev, next }, pathname} = action
+            return {
+                ...state,
                 article: {
-                    data: action.json.data,
-                    prev: action.json.prev,
-                    next: action.json.next,
-                    pathname: action.pathname
-                },
-            })
+                    data,
+                    prev,
+                    next,
+                    pathname
+                }
+            }
         }
         case RECEIVE_COMMENT: {
-            let lists
-            if (action.page === 1) {
-                lists = [].concat(action.json.data.list)
-            } else {
-                lists = state.comment.list.concat(action.json.data.list)
-            }
-            return Object.assign({}, state, {
+            const {json: { data: {list, hasNext} }, page, pathname} = action
+            let lists = page === 1 ? [].concat(list) : state.posts.list.concat(list)
+            return {
+                ...state,
                 comment: {
                     list: lists,
-                    hasNext: action.json.data.hasNext,
-                    page: action.page
-                },
-            })
+                    hasNext,
+                    page,
+                    pathname
+                }
+            }
         }
         case POST_COMMENT: {
             const lists = action.data.concat(state.comment.list)
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 comment: {
                     ...state.comment,
                     list: lists
                 }
-            })
+            }
         }
         default:
             return state

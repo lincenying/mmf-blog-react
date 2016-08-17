@@ -11,11 +11,11 @@ const article = React.createClass({
         fetchArticle: PropTypes.func,
         article: PropTypes.object
     },
-    componentDidMount() {
+    componentWillMount() {
         let {pathname} = this.props.article
         if (pathname !== this.props.location.pathname) this.handlefetchArticle()
     },
-    componentDidUpdate(prevProps) {
+    componentWillUpdate(prevProps) {
         let pathname = this.props.location.pathname
         let prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchArticle()

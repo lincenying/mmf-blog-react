@@ -21,9 +21,10 @@ export function globals(state = _globals, action) {
                     content: message
                 }
             }
-            return Object.assign({}, state, {
-                message: message
-            })
+            return {
+                ...state,
+                message
+            }
         }
         default:
             return state

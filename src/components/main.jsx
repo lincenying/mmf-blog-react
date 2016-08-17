@@ -9,11 +9,11 @@ const main = React.createClass({
         fetchPosts: PropTypes.func,
         posts: PropTypes.object
     },
-    componentDidMount() {
+    componentWillMount() {
         let {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchPosts()
     },
-    componentDidUpdate(prevProps) {
+    componentWillUpdate(prevProps) {
         let pathname = this.props.location.pathname
         let prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchPosts()

@@ -11,11 +11,11 @@ const admin_article_list = React.createClass({
         deleteArticle: PropTypes.func,
         posts: PropTypes.object
     },
-    componentDidMount() {
+    componentWillMount() {
         let {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchAdminArticlePosts()
     },
-    componentDidUpdate(prevProps) {
+    componentWillUpdate(prevProps) {
         let pathname = this.props.location.pathname
         let prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchAdminArticlePosts()

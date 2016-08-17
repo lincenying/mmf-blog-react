@@ -1,5 +1,8 @@
 import {
-    RECEIVE_ADMIN_POSTS, RECEIVE_ADMIN_ARTICLE, RCOVER_ARTICLE, DELETE_ARTICLE
+    RECEIVE_ADMIN_POSTS,
+    RECEIVE_ADMIN_ARTICLE,
+    RCOVER_ARTICLE,
+    DELETE_ARTICLE
 } from '../actions/admin'
 
 const states = {
@@ -19,45 +22,51 @@ const states = {
 export function admin(state = states, action) {
     switch (action.type) {
         case RECEIVE_ADMIN_POSTS: {
-            return Object.assign({}, state, {
+            const { posts: { list, hasNext, hasPrev }, page, pathname } = action
+            return {
+                ...state,
                 posts: {
-                    list: action.posts.list,
-                    page: parseInt(action.page, 10),
-                    hasNext: action.posts.hasNext,
-                    hasPrev: action.posts.hasPrev,
-                    pathname: action.pathname
-                },
-            })
+                    list,
+                    page: parseInt(page, 10),
+                    hasNext,
+                    hasPrev,
+                    pathname
+                }
+            }
         }
         case RECEIVE_ADMIN_ARTICLE: {
-            return Object.assign({}, state, {
+            const { json: { data }, pathname } = action
+            return {
+                ...state,
                 article: {
-                    data: action.json.data,
-                    pathname: action.pathname
-                },
-            })
+                    data,
+                    pathname
+                }
+            }
         }
         case RCOVER_ARTICLE: {
             let list = state.posts.list
             const obj = list.find(ii => action.id === ii._id)
             obj.is_delete = "0"
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 posts: {
                     ...state.posts,
-                    list: list
-                },
-            })
+                    list
+                }
+            }
         }
         case DELETE_ARTICLE: {
             let list = state.posts.list
             const obj = list.find(ii => action.id === ii._id)
             obj.is_delete = "1"
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 posts: {
                     ...state.posts,
-                    list: list
-                },
-            })
+                    list
+                }
+            }
         }
         default:
             return state

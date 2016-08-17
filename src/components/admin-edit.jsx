@@ -12,7 +12,7 @@ const admin_article_edit = React.createClass({
             content: ''
         }
     },
-    componentDidMount() {
+    componentWillMount() {
         const {fetchAdminArticle, params: {id}, location: {pathname}} = this.props
         fetchAdminArticle({
             action: 'getArticle',
@@ -20,7 +20,7 @@ const admin_article_edit = React.createClass({
             pathname
         })
     },
-    componentDidUpdate(prevProps) {
+    componentWillUpdate(prevProps) {
         if (!prevProps.article.data._id && this.props.article.data._id) {
             this.setState({
                 title: this.props.article.data.title,

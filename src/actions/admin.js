@@ -5,57 +5,54 @@ export const RECEIVE_ADMIN_ARTICLE = 'RECEIVE_ADMIN_ARTICLE'
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 export const RCOVER_ARTICLE = 'RCOVER_ARTICLE'
 
-function receiveAdminPosts(json, page, pathname) {
+function receiveAdminPosts(config) {
     return {
         type: RECEIVE_ADMIN_POSTS,
-        posts: json,
-        page,
-        pathname
+        ...config
     }
 }
 
 export function fetchAdminPosts(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(receiveAdminPosts(json.data, config.page, config.pathname)))
+        return api.getFromConfig(config).then(json => dispatch(receiveAdminPosts({posts: json.data, ...config})))
     }
 }
 
-function receiveAdminArticle(json, pathname) {
+function receiveAdminArticle(config) {
     return {
         type: RECEIVE_ADMIN_ARTICLE,
-        json,
-        pathname
+        ...config
     }
 }
 
 export function fetchAdminArticle(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(receiveAdminArticle(json, config.config)))
+        return api.getFromConfig(config).then(json => dispatch(receiveAdminArticle({json, ...config})))
     }
 }
 
-function deleteArticleAction(id) {
+function deleteArticleAction(config) {
     return {
         type: DELETE_ARTICLE,
-        id
+        ...config
     }
 }
 
 export function deleteArticle(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(deleteArticleAction(config.id)))
+        return api.getFromConfig(config).then(json => dispatch(deleteArticleAction({...config})))
     }
 }
 
-function recoverArticleAction(id) {
+function recoverArticleAction(config) {
     return {
         type: RCOVER_ARTICLE,
-        id
+        ...config
     }
 }
 
 export function recoverArticle(config) {
     return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(recoverArticleAction(config.id)))
+        return api.getFromConfig(config).then(json => dispatch(recoverArticleAction({...config})))
     }
 }
