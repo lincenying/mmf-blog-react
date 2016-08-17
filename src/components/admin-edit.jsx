@@ -117,7 +117,7 @@ const admin_article_edit = React.createClass({
 })
 function mapStateToProps(state) {
     return {
-        article: state.admin.article
+        article: state.admin.toJS().article
     }
 }
 

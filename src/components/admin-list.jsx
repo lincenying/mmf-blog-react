@@ -78,7 +78,7 @@ const admin_article_list = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        posts: state.admin.posts
+        posts: state.admin.toJS().posts
     }
 }
 

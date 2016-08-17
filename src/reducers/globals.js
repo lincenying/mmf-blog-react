@@ -1,32 +1,28 @@
 import {
     INCREMENT_MESSAGE
 } from '../actions/globals'
+import { createReducer } from 'redux-immutablejs'
+import { fromJS } from 'immutable'
 
-const _globals = {
+const initStates = fromJS({
     message: {
         type: '',
         content: '',
         title: ''
     }
-}
-
-export function globals(state = _globals, action) {
-    switch (action.type) {
-        case INCREMENT_MESSAGE: {
-            let message = action.message
-            if (typeof message === 'string') {
-                message = {
-                    type: 'success',
-                    title: '',
-                    content: message
-                }
-            }
-            return {
-                ...state,
-                message
+})
+export const globals = createReducer(initStates, {
+    [INCREMENT_MESSAGE]: (state, action) => {
+        let message = action.message
+        if (typeof message === 'string') {
+            message = {
+                type: 'success',
+                title: '',
+                content: message
             }
         }
-        default:
-            return state
+        return state.merge({
+            message
+        })
     }
-}
+})

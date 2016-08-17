@@ -104,7 +104,7 @@ comment.propTypes = {
     comment: PropTypes.object
 }
 function mapStateToProps(state) {
-    return {comment: state.article.comment}
+    return {comment: state.article.toJS().comment}
 }
 
 function mapDispatchToProps(dispatch) {

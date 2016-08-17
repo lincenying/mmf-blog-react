@@ -4,8 +4,10 @@ import {
     RCOVER_ARTICLE,
     DELETE_ARTICLE
 } from '../actions/admin'
+import { createReducer } from 'redux-immutablejs'
+import { fromJS } from 'immutable'
 
-const states = {
+const initStates = fromJS({
     posts: {
         list: [],
         hasNext: 0,
@@ -17,58 +19,47 @@ const states = {
         data: {},
         pathname: ''
     }
-}
-
-export function admin(state = states, action) {
-    switch (action.type) {
-        case RECEIVE_ADMIN_POSTS: {
-            const { posts: { list, hasNext, hasPrev }, page, pathname } = action
-            return {
-                ...state,
-                posts: {
-                    list,
-                    page: parseInt(page, 10),
-                    hasNext,
-                    hasPrev,
-                    pathname
-                }
+})
+export const admin = createReducer(initStates, {
+    [RECEIVE_ADMIN_POSTS]: (state, action) => {
+        const { posts: { list, hasNext, hasPrev }, page, pathname } = action
+        return state.merge({
+            posts: {
+                list,
+                hasNext,
+                hasPrev,
+                page: parseInt(page, 10),
+                pathname
             }
-        }
-        case RECEIVE_ADMIN_ARTICLE: {
-            const { json: { data }, pathname } = action
-            return {
-                ...state,
-                article: {
-                    data,
-                    pathname
-                }
+        })
+    },
+    [RECEIVE_ADMIN_ARTICLE]: (state, action) => {
+        const { json: { data }, pathname } = action
+        return state.merge({
+            article: {
+                data,
+                pathname
             }
-        }
-        case RCOVER_ARTICLE: {
-            let list = state.posts.list
-            const obj = list.find(ii => action.id === ii._id)
-            obj.is_delete = "0"
-            return {
-                ...state,
-                posts: {
-                    ...state.posts,
-                    list
-                }
+        })
+    },
+    [RCOVER_ARTICLE]: (state, action) => {
+        let list = state.get('posts').toJS().list
+        const obj = list.find(ii => action.id === ii._id)
+        obj.is_delete = "0"
+        return state.mergeDeep({
+            posts: {
+                list
             }
-        }
-        case DELETE_ARTICLE: {
-            let list = state.posts.list
-            const obj = list.find(ii => action.id === ii._id)
-            obj.is_delete = "1"
-            return {
-                ...state,
-                posts: {
-                    ...state.posts,
-                    list
-                }
+        })
+    },
+    [DELETE_ARTICLE]: (state, action) => {
+        let list = state.get('posts').toJS().list
+        const obj = list.find(ii => action.id === ii._id)
+        obj.is_delete = "1"
+        return state.mergeDeep({
+            posts: {
+                list
             }
-        }
-        default:
-            return state
+        })
     }
-}
+})

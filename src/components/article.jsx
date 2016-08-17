@@ -67,7 +67,7 @@ const article = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        article: state.article.article
+        article: state.article.toJS().article
     }
 }
 
