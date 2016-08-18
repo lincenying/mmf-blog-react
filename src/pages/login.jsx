@@ -1,6 +1,7 @@
 import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {DevTools} from '../components/devtools'
 import {Toastr} from '../components/_toastr.jsx'
 import * as globalsActions from '../actions/globals'
 import api from '../api'
@@ -66,20 +67,15 @@ export const login = React.createClass({
                         <p className="submit"><input type="submit" value="登录"/></p>
                     </form>
                 </div>
+                <DevTools />
                 <Toastr />
             </section>
         )
     }
 })
 
-function mapStateToProps(state) {
-    return {
-
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(globalsActions, dispatch)
 }
 
-export const Login = connect(mapStateToProps, mapDispatchToProps)(login)
+export const Login = connect(null, mapDispatchToProps)(login)

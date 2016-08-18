@@ -18,7 +18,7 @@ export const MainItem = React.createClass({
                 <a href="javascript:;" className="w-icon w-icon-1">&nbsp;</a>
                 <a href="javascript:;" className="w-icon2">&nbsp;</a>
                 <div className="info">
-                    <a href="javascript:;">{item.created_at}</a>
+                    <a href="javascript:;">{item.creat_date || item.created_at}</a>
                 </div>
                 <div className="cont cont-1">
                     <div className="text">

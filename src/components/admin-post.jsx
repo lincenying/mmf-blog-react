@@ -100,14 +100,9 @@ const admin_article_post = React.createClass({
         )
     }
 })
-function mapStateToProps(state) {
-    return {
-
-    }
-}
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(globalsActions, dispatch)
 }
 
-export const AdminArticlePost = connect(mapStateToProps, mapDispatchToProps)(admin_article_post)
+export const AdminArticlePost = connect(null, mapDispatchToProps)(admin_article_post)

@@ -10,8 +10,6 @@ export const toastr = React.createClass({
         setMessage: PropTypes.func,
         message: PropTypes.object
     },
-    componentDidMount() {
-    },
     componentDidUpdate(prevProps) {
         const { message, setMessage } = this.props
         const oldMessage = prevProps.message
@@ -35,7 +33,7 @@ export const toastr = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        message: state.globals.message
+        message: state.globals.toJS().message
     }
 }
 
