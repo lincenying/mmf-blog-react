@@ -29,11 +29,11 @@ var buildPath = path.join(__dirname, isInNodeModules ? '../../..' : '..', 'build
 
 module.exports = {
     bail: true,
-    devtool: 'source-map',
+    devtool: false,
     entry: {
         app: path.join(srcPath, 'index'),
         login: path.join(srcPath, 'login'),
-        vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux']
+        vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
     },
     output: {
         path: buildPath,
@@ -96,6 +96,7 @@ module.exports = {
         return [autoprefixer];
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'static/js/[name].[chunkhash].js'),
         new HtmlWebpackPlugin({
             inject: true,
             chunks: ['vendor', 'polyfill', 'app'],
@@ -141,15 +142,15 @@ module.exports = {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
-                screw_ie8: true,
+                //screw_ie8: true,
                 warnings: false
             },
             mangle: {
-                screw_ie8: true
+                //screw_ie8: true
             },
             output: {
                 comments: false,
-                screw_ie8: true
+                //screw_ie8: true
             }
         }),
         new ExtractTextPlugin('static/css/[name].[contenthash].css'),

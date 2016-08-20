@@ -38,7 +38,7 @@ var config = {
         login: [
             path.join(srcPath, 'login.jsx')
         ],
-        vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux']
+        vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
     },
     output: {
         // Next line is not used in dev but WebpackDevServer crashes without it:
@@ -90,6 +90,7 @@ var config = {
         return [autoprefixer];
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin('vendor', '[name].js'),
         new HtmlWebpackPlugin({
             chunks: ['vendor', 'polyfill', 'app'],
             filename: 'index.html',

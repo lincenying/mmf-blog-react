@@ -10,7 +10,7 @@ var config = require('../config/webpack.config.prod');
 
 var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relative = isInNodeModules ? '../..' : '.';
-rimrafSync(relative + '/build');
+rm('-rf', relative + '/build')
 mkdir('-p', relative + '/build/static')
 cp('-R', 'static/', relative + '/build/')
 
