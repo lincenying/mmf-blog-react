@@ -16,9 +16,6 @@ module.exports = {
         'babel-preset-react'
     ].map(require.resolve),
     plugins: [
-        'babel-plugin-transform-runtime',
-        'babel-plugin-syntax-trailing-function-commas',
-        'babel-plugin-transform-class-properties',
-        'babel-plugin-transform-object-rest-spread'
+        'babel-plugin-transform-runtime'
     ].map(require.resolve)
 };
