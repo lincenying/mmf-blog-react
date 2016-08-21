@@ -13,7 +13,7 @@ function receivePosts(config) {
 }
 
 export function fetchPosts(config) {
-    return (dispatch, getState) => {
+    return dispatch => {
         return api.getFromConfig(config).then(json => dispatch(receivePosts({posts: json.data, ...config})))
     }
 }
@@ -26,7 +26,7 @@ function receiveArticle(config) {
 }
 
 export function fetchArticle(config) {
-    return (dispatch, getState) => {
+    return dispatch => {
         return api.getFromConfig(config).then(json => dispatch(receiveArticle({json, ...config})))
     }
 }
@@ -39,7 +39,7 @@ function receiveComment(config) {
 }
 
 export function fetchComment(config) {
-    return (dispatch, getState) => {
+    return dispatch => {
         return api.getFromConfig(config).then(json => dispatch(receiveComment({
             json,
             ...config

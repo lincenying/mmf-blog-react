@@ -1,16 +1,19 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as globalsActions from '../actions/globals'
 
-const admin_article_post = React.createClass({
-    getInitialState: function() {
-        return {
+class admin_article_post extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
             title: '',
             category: '',
             content: ''
         }
-    },
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    }
     componentDidMount() {
         // eslint-disable-next-line
         window.articleEditor = editormd("post-content", {
@@ -34,10 +37,7 @@ const admin_article_post = React.createClass({
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL : "/api/?action=upload"
         })
-    },
-    componentDidUpdate(prevProps) {
-
-    },
+    }
     handleSubmit(event) {
         event.preventDefault()
         const {setMessage} = this.props
@@ -67,20 +67,24 @@ const admin_article_post = React.createClass({
                 })
             }
         })
-    },
-    handleChange(type, event) {
-        this.setState({[type]: event.target.value})
-    },
+    }
+    handleChange(e) {
+        const id = e.target.id,
+            value = e.target.value
+        const state = this.state
+        state[id] = value
+        this.setState(state)
+    }
     render() {
         return (
             <div className="g-mn">
                 <div className="box">
                     <form onSubmit={this.handleSubmit} id="article-post" action="/api/" method="post">
                         <section id="post-title">
-                            <input value={this.state.title} onChange={this.handleChange.bind(this, 'title')} type="text" className="form-control" placeholder="请输入标题" />
+                            <input value={this.state.title} onChange={this.handleChange} id="title" type="text" className="form-control" placeholder="请输入标题" />
                         </section>
                         <section id="post-category">
-                            <select value={this.state.category} onChange={this.handleChange.bind(this, 'category')} id="category" name="category" className="form-control">
+                            <select value={this.state.category} onChange={this.handleChange} id="category" name="category" className="form-control">
                                 <option value="">请选择分类</option>
                                 <option value="1">生活</option>
                                 <option value="2">工作</option>
@@ -99,7 +103,7 @@ const admin_article_post = React.createClass({
             </div>
         )
     }
-})
+}
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(globalsActions, dispatch)

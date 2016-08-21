@@ -1,23 +1,23 @@
-import React, {PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as articleActions from '../actions/article'
 import {MainItem} from "./main-item"
 
-const main = React.createClass({
-    propTypes: {
-        fetchPosts: PropTypes.func,
-        posts: PropTypes.object
-    },
+class main extends Component {
+    constructor(props) {
+        super(props)
+        this.handleLoadMore = this.handleLoadMore.bind(this)
+    }
     componentWillMount() {
-        let {pathname} = this.props.posts
+        const {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchPosts()
-    },
+    }
     componentDidUpdate(prevProps) {
-        let pathname = this.props.location.pathname
-        let prevPathname = prevProps.location.pathname
+        const pathname = this.props.location.pathname
+        const prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchPosts()
-    },
+    }
     handlefetchPosts(page = 1) {
         const {fetchPosts, params: {id, qs}, location: {pathname}} = this.props
         fetchPosts({
@@ -29,16 +29,16 @@ const main = React.createClass({
             limit: 10,
             markdown: 1
         })
-    },
+    }
     handleLoadMore() {
         const {page} = this.props.posts
         this.handlefetchPosts(page + 1)
-    },
+    }
     render() {
         const {list, hasNext} = this.props.posts
-        const lists = list.map((list, index) => {
+        const lists = list.map(list => {
             return (
-                <MainItem key={list._id} list={list}></MainItem>
+                <MainItem key={list._id} list={list} />
             )
         })
         const loadMore = hasNext ? <a onClick={this.handleLoadMore} href="javascript:;">加载更多</a> : <span>好厉害, 竟然翻到最后一页了...</span>
@@ -50,12 +50,17 @@ const main = React.createClass({
                 <div className="box m-page box-do">
                     <div className="w-icon w-icon-2"></div>
                     <div className="w-icon w-icon-3"></div>
-                    { loadMore }
+                    {loadMore}
                 </div>
             </div>
         )
     }
-})
+}
+
+main.propTypes = {
+    fetchPosts: PropTypes.func,
+    posts: PropTypes.object
+}
 
 function mapStateToProps(state) {
     return {

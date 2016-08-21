@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router'
 
-export const MainItem = React.createClass({
-    getInitialState: function() {
-        return {showMore: 0}
-    },
+export class MainItem extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showMore: 0
+        }
+        this.handleOpen = this.handleOpen.bind(this)
+    }
     handleOpen() {
         this.setState({showMore: !this.state.showMore})
-    },
+    }
     render() {
         const item = this.props.list
         const btn = this.state.showMore ?
@@ -23,7 +27,7 @@ export const MainItem = React.createClass({
                 <div className="cont cont-1">
                     <div className="text">
                         <h2><Link to={`/article/${item._id}`}>{item.title}</Link></h2>
-                        <div className={ !this.state.showMore ? "markdown-body showless" : "markdown-body" } dangerouslySetInnerHTML={{__html: item.content}}></div>
+                        <div className={!this.state.showMore ? "markdown-body showless" : "markdown-body"} dangerouslySetInnerHTML={{__html: item.content}}></div>
                         <div className="more-less">{btn}</div>
                     </div>
                 </div>
@@ -31,4 +35,4 @@ export const MainItem = React.createClass({
             </div>
         )
     }
-})
+}

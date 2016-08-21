@@ -43,7 +43,7 @@ export const admin = createReducer(initStates, {
         })
     },
     [RCOVER_ARTICLE]: (state, action) => {
-        let list = state.get('posts').toJS().list
+        const list = state.get('posts').toJS().list
         const obj = list.find(ii => action.id === ii._id)
         obj.is_delete = "0"
         return state.mergeDeep({
@@ -53,7 +53,7 @@ export const admin = createReducer(initStates, {
         })
     },
     [DELETE_ARTICLE]: (state, action) => {
-        let list = state.get('posts').toJS().list
+        const list = state.get('posts').toJS().list
         const obj = list.find(ii => action.id === ii._id)
         obj.is_delete = "1"
         return state.mergeDeep({

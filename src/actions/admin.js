@@ -13,7 +13,7 @@ function receiveAdminPosts(config) {
 }
 
 export function fetchAdminPosts(config) {
-    return (dispatch, getState) => {
+    return dispatch => {
         return api.getFromConfig(config).then(json => dispatch(receiveAdminPosts({posts: json.data, ...config})))
     }
 }
@@ -26,7 +26,7 @@ function receiveAdminArticle(config) {
 }
 
 export function fetchAdminArticle(config) {
-    return (dispatch, getState) => {
+    return dispatch => {
         return api.getFromConfig(config).then(json => dispatch(receiveAdminArticle({json, ...config})))
     }
 }
@@ -39,8 +39,8 @@ function deleteArticleAction(config) {
 }
 
 export function deleteArticle(config) {
-    return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(deleteArticleAction({...config})))
+    return dispatch => {
+        return api.getFromConfig(config).then(() => dispatch(deleteArticleAction({...config})))
     }
 }
 
@@ -52,7 +52,7 @@ function recoverArticleAction(config) {
 }
 
 export function recoverArticle(config) {
-    return (dispatch, getState) => {
-        return api.getFromConfig(config).then(json => dispatch(recoverArticleAction({...config})))
+    return dispatch => {
+        return api.getFromConfig(config).then(() => dispatch(recoverArticleAction({...config})))
     }
 }

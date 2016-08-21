@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-export const CommentItem = React.createClass({
-    getInitialState: function() {
-        return {showMore: 0}
-    },
+export class CommentItem extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showMore: 0
+        }
+    }
     handleReply(val) {
         $('#content').val('回复 '+ val +': ').focus()
-    },
+    }
     render() {
         const {list} = this.props
         return (
@@ -21,9 +24,9 @@ export const CommentItem = React.createClass({
                                 <div className="bcmtlstg">
                                     <div className="bcmtlsti">
                                         <div className="bcmtlstj">
-                                            <a className="s-fc2 itag bcmtlstk" href="javascript:;">{ list.username }</a>
+                                            <a className="s-fc2 itag bcmtlstk" href="javascript:;">{list.username}</a>
                                             <span className="bcmtlstf s-fc4">：</span>
-                                            <span className="bcmtlstf s-fc4 itag">{ list.content }</span></div>
+                                            <span className="bcmtlstf s-fc4 itag">{list.content}</span></div>
                                     </div>
                                 </div>
                                 <div className="bcmtlsth">
@@ -36,4 +39,4 @@ export const CommentItem = React.createClass({
             </li>
         )
     }
-})
+}

@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
@@ -6,20 +6,16 @@ import * as articleActions from '../actions/article'
 import * as globalsActions from '../actions/globals'
 import {Comment} from './comment'
 
-const article = React.createClass({
-    propTypes: {
-        fetchArticle: PropTypes.func,
-        article: PropTypes.object
-    },
+class article extends Component {
     componentWillMount() {
-        let {pathname} = this.props.article
+        const {pathname} = this.props.article
         if (pathname !== this.props.location.pathname) this.handlefetchArticle()
-    },
+    }
     componentDidUpdate(prevProps) {
-        let pathname = this.props.location.pathname
-        let prevPathname = prevProps.location.pathname
+        const pathname = this.props.location.pathname
+        const prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchArticle()
-    },
+    }
     handlefetchArticle() {
         const {fetchArticle, params: {id}, location: {pathname}} = this.props
         fetchArticle({
@@ -28,7 +24,7 @@ const article = React.createClass({
             pathname,
             markdown: 1
         })
-    },
+    }
     render() {
         const {article, location: {pathname}, params: {id}} = this.props
         const prev = article.prev.prev_id ? <Link to={`/article/${article.prev.prev_id}`} className="prev">上一篇</Link> : <span className="prev">上一篇</span>
@@ -40,13 +36,13 @@ const article = React.createClass({
                         <a href="javascript:;" className="w-icon w-icon-1">&nbsp;</a>
                         <a href="javascript:;" className="w-icon2">&nbsp;</a>
                         <div className="info">
-                            <a href="javascript:;">{ article.data.creat_date }</a>
-                            <a href="javascript:;">浏览: { article.data.visit }</a>
-                            <a href="javascript:;" className="comnum">{ article.data.comment_count }</a>
+                            <a href="javascript:;">{article.data.creat_date}</a>
+                            <a href="javascript:;">浏览: {article.data.visit}</a>
+                            <a href="javascript:;" className="comnum">{article.data.comment_count}</a>
                         </div>
                         <div className="cont cont-1">
                             <div className="text">
-                                <h2><Link to={`/article/${article.data._id}`}>{ article.data.title }</Link></h2>
+                                <h2><Link to={`/article/${article.data._id}`}>{article.data.title}</Link></h2>
                                 <div className="markdown-body" dangerouslySetInnerHTML={{__html: article.data.content}}></div>
                             </div>
                         </div>
@@ -63,7 +59,12 @@ const article = React.createClass({
             </div>
         )
     }
-})
+}
+
+article.propTypes = {
+    article: PropTypes.object,
+    fetchArticle: PropTypes.func
+}
 
 function mapStateToProps(state) {
     return {

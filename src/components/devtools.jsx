@@ -2,7 +2,7 @@ import React from 'react'
 
 if (process.env.NODE_ENV === 'production') {
     module.exports = {
-        DevTools: React.createClass({
+        DevTools: React.createClass({ // eslint-disable-line
             render() {
                 return null
             }
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
     module.exports = {
         DevTools: createDevTools(
             <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
-                <LogMonitor theme="solarized"/>
+                <LogMonitor theme="solarized" />
             </DockMonitor>
         )
     }

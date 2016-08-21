@@ -12,28 +12,26 @@ import '../html/css/nprogress.css'
 import '../html/css/animate.min.css'
 import '../html/css/toastr.min.css'
 
-export const App = React.createClass({
-    render() {
-        const {route: {needLogin}} = this.props
-        const menu = needLogin === "1" ? <MenuAdmin /> : <MenuFront />
-        return (
-            <div className="g-doc">
-                <div className="g-hd">
-                    <About></About>
-                    {menu}
-                </div>
-                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-                    {
-                        React.cloneElement(this.props.children, {
-                            key: this.props.location.pathname
-                        })
-                    }
-                </ReactCSSTransitionGroup>
-                <Footer />
-                <Arrow />
-                <DevTools />
-                <Toastr />
+export const App = props => {
+    const {route: {needLogin}} = props
+    const menu = needLogin === "1" ? <MenuAdmin /> : <MenuFront />
+    return (
+        <div className="g-doc">
+            <div className="g-hd">
+                <About />
+                {menu}
             </div>
-        )
-    }
-})
+            <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+            {
+                React.cloneElement(props.children, {
+                    key: props.location.pathname
+                })
+            }
+            </ReactCSSTransitionGroup>
+            <Footer />
+            <Arrow />
+            <DevTools />
+            <Toastr />
+        </div>
+    )
+}

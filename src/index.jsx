@@ -38,12 +38,15 @@ ReactDOM.render(
                 <Route name="search" path="/search/:qs" component={Main} />
                 <Route name="article" path="/article/:id" component={Article} onEnter={goScrollTop} />
             </Route>
-            <Route onEnter={checkLogin} name="admin" needLogin="1" path="/admin" component={App}>
+            <Route name="admin" needLogin="1" path="/admin"
+                onEnter={checkLogin}
+                component={App}
+            >
                 <Route name="list" path="/admin/list(/:page)" component={AdminArticleList} />
                 <Route name="post" path="/admin/post" component={AdminArticlePost} />
                 <Route name="post" path="/admin/edit/:id/:page" component={AdminArticleEdit} />
             </Route>
-            <Route path="*" component={NotFound}/>
+            <Route component={NotFound} path="*" />
         </Router>
     </Provider>,
     document.getElementById('root')

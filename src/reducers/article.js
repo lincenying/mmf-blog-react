@@ -28,7 +28,7 @@ const initStates = fromJS({
 export const article = createReducer(initStates, {
     [RECEIVE_POSTS]: (state, action) => {
         const {posts: { list, hasNext }, page, pathname} = action
-        let lists = page === 1 ? [].concat(list) : state.get('posts').toJS().list.concat(list)
+        const lists = page === 1 ? [].concat(list) : state.get('posts').toJS().list.concat(list)
         return state.merge({
             posts: {
                 list: lists,
@@ -51,7 +51,7 @@ export const article = createReducer(initStates, {
     },
     [RECEIVE_COMMENT]: (state, action) => {
         const {json: { data: {list, hasNext} }, page, pathname} = action
-        let lists = page === 1 ? [].concat(list) : state.get('comment').toJS().list.concat(list)
+        const lists = page === 1 ? [].concat(list) : state.get('comment').toJS().list.concat(list)
         return state.merge({
             comment: {
                 list: lists,

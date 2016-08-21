@@ -18,17 +18,28 @@ class comment extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
     componentWillMount() {
-        let {pathname} = this.props.comment
-        if (pathname !== this.props.pathname) this._fetchComment()
+        const {pathname} = this.props.comment
+        if (pathname !== this.props.pathname) this.handleFetchComment()
     }
     componentDidUpdate(prevProps) {
-        let pathname = this.props.pathname
-        let prevPathname = prevProps.pathname
-        if (pathname !== prevPathname) this._fetchComment()
+        const pathname = this.props.pathname
+        const prevPathname = prevProps.pathname
+        if (pathname !== prevPathname) this.handleFetchComment()
     }
-    _fetchComment(page = 1) {
+    handleChange(e) {
+        const id = e.target.id,
+            value = e.target.value
+        const state = this.state
+        state[id] = value
+        this.setState(state)
+    }
+    handleFetchComment(page = 1) {
         const {fetchComment, id, pathname} = this.props
         fetchComment({action: 'comment', id, page, pathname})
+    }
+    handleLoadMore() {
+        const {page} = this.props.comment
+        this.handleFetchComment(page + 1)
     }
     async handlePostComment() {
         const {postComment, setMessage, id} = this.props
@@ -47,29 +58,19 @@ class comment extends Component {
         this.setState({username: '', content: ''})
         setMessage('发表评论成功!')
     }
-    handleLoadMore() {
-        const {page} = this.props.comment
-        this._fetchComment(page + 1)
-    }
-    handleChange(type, event) {
-        this.setState({[type]: event.target.value})
-    }
     render() {
         const {list, hasNext} = this.props.comment
-        const lists = list.map((list, index) => {
+        const lists = list.map(list => {
             return (
-                <CommentItem key={list._id} list={list}></CommentItem>
+                <CommentItem key={list._id} list={list} />
             )
         })
-        const more = hasNext
-            ? (
-                <div className="bcmtmore s-bd2">
-                    <div className="bcmtlsta">
-                        <a onClick={this.handleLoadMore} href="javascript:;" className="s-fc2 ztag">查看更多</a>
-                    </div>
+        const more = hasNext ?
+            <div className="bcmtmore s-bd2">
+                <div className="bcmtlsta">
+                    <a onClick={this.handleLoadMore} href="javascript:;" className="s-fc2 ztag">查看更多</a>
                 </div>
-            )
-            : ''
+            </div> : ''
         return (
             <div className="box">
                 <div className="comment">
@@ -77,8 +78,8 @@ class comment extends Component {
                     <div className="bcmt">
                         <div className="s-fc0 ztag ztag_tips">由于该用户的权限设置，您暂时无法进行评论...</div>
                         <div className="bcmtadd">
-                            <input value={this.state.username} onChange={this.handleChange.bind(this, 'username')} type="text" className="form-control" placeholder="请输入昵称"/>
-                            <textarea value={this.state.content} onChange={this.handleChange.bind(this, 'content')} id="content" className="form-control" placeholder="请输入评论内容"></textarea>
+                            <input value={this.state.username} onChange={this.handleChange} id="username" type="text" className="form-control" placeholder="请输入昵称" />
+                            <textarea value={this.state.content} onChange={this.handleChange} id="content" className="form-control" placeholder="请输入评论内容"></textarea>
                             <div className="bcmtbtn">
                                 <span className="ztag ztag_tips">提示</span>
                                 <button onClick={this.handlePostComment} className="s-bd1 s-fc1 s-bg1 ztag">发布</button>
@@ -99,9 +100,9 @@ class comment extends Component {
 }
 
 comment.propTypes = {
+    comment: PropTypes.object,
     fetchComment: PropTypes.func,
-    postComment: PropTypes.func,
-    comment: PropTypes.object
+    postComment: PropTypes.func
 }
 function mapStateToProps(state) {
     return {comment: state.article.toJS().comment}
