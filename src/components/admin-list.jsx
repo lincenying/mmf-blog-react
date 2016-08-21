@@ -15,7 +15,7 @@ const admin_article_list = React.createClass({
         let {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchAdminArticlePosts()
     },
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         let pathname = this.props.location.pathname
         let prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchAdminArticlePosts()

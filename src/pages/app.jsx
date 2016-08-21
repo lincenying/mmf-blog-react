@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import {About} from '../components/about'
 import {MenuFront} from '../components/menu-front'
 import {MenuAdmin} from '../components/menu-admin'
@@ -21,7 +22,13 @@ export const App = React.createClass({
                     <About></About>
                     {menu}
                 </div>
-                { this.props.children }
+                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                    {
+                        React.cloneElement(this.props.children, {
+                            key: this.props.location.pathname
+                        })
+                    }
+                </ReactCSSTransitionGroup>
                 <Footer />
                 <Arrow />
                 <DevTools />

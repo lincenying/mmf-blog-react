@@ -21,7 +21,7 @@ class comment extends Component {
         let {pathname} = this.props.comment
         if (pathname !== this.props.pathname) this._fetchComment()
     }
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         let pathname = this.props.pathname
         let prevPathname = prevProps.pathname
         if (pathname !== prevPathname) this._fetchComment()

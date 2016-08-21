@@ -13,7 +13,7 @@ const main = React.createClass({
         let {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchPosts()
     },
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         let pathname = this.props.location.pathname
         let prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchPosts()

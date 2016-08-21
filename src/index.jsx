@@ -25,6 +25,9 @@ const checkLogin = (nextState, replace, callback) => {
     }
     callback()
 }
+const goScrollTop = () => {
+    window.scrollTo(0, 0)
+}
 
 ReactDOM.render(
     <Provider store={store}>
@@ -33,7 +36,7 @@ ReactDOM.render(
                 <IndexRoute component={Main} />
                 <Route name="category" path="/category/:id" component={Main} />
                 <Route name="search" path="/search/:qs" component={Main} />
-                <Route name="article" path="/article/:id" component={Article} />
+                <Route name="article" path="/article/:id" component={Article} onEnter={goScrollTop} />
             </Route>
             <Route onEnter={checkLogin} name="admin" needLogin="1" path="/admin" component={App}>
                 <Route name="list" path="/admin/list(/:page)" component={AdminArticleList} />

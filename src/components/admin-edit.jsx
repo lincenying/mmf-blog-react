@@ -20,7 +20,7 @@ const admin_article_edit = React.createClass({
             pathname
         })
     },
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         if (!prevProps.article.data._id && this.props.article.data._id) {
             this.setState({
                 title: this.props.article.data.title,

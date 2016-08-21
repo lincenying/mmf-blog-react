@@ -15,7 +15,7 @@ const article = React.createClass({
         let {pathname} = this.props.article
         if (pathname !== this.props.location.pathname) this.handlefetchArticle()
     },
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         let pathname = this.props.location.pathname
         let prevPathname = prevProps.location.pathname
         if (pathname !== prevPathname) this.handlefetchArticle()

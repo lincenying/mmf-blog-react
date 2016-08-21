@@ -35,7 +35,7 @@ const admin_article_post = React.createClass({
             imageUploadURL : "/api/?action=upload"
         })
     },
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
 
     },
     handleSubmit(event) {
