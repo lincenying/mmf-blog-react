@@ -1,10 +1,25 @@
 import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {propTypes} from '../decorators'
 import * as articleActions from '../actions/article'
 import {MainItem} from "./main-item"
 
-class main extends Component {
+function mapStateToProps(state) {
+    return {
+        posts: state.article.toJS().posts
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(articleActions, dispatch)
+}
+
+@propTypes({
+    fetchPosts: PropTypes.func,
+    posts: PropTypes.object
+})
+@connect(mapStateToProps, mapDispatchToProps)
+export class Main extends Component {
     constructor(props) {
         super(props)
         this.handleLoadMore = this.handleLoadMore.bind(this)
@@ -56,20 +71,3 @@ class main extends Component {
         )
     }
 }
-
-main.propTypes = {
-    fetchPosts: PropTypes.func,
-    posts: PropTypes.object
-}
-
-function mapStateToProps(state) {
-    return {
-        posts: state.article.toJS().posts
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(articleActions, dispatch)
-}
-
-export const Main = connect(mapStateToProps, mapDispatchToProps)(main)

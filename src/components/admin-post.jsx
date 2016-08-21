@@ -1,9 +1,18 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {propTypes} from '../decorators'
 import * as globalsActions from '../actions/globals'
 
-class admin_article_post extends Component {
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(globalsActions, dispatch)
+}
+
+@propTypes({
+    setMessage: React.PropTypes.func
+})
+@connect(null, mapDispatchToProps)
+export class AdminArticlePost extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -104,9 +113,3 @@ class admin_article_post extends Component {
         )
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(globalsActions, dispatch)
-}
-
-export const AdminArticlePost = connect(null, mapDispatchToProps)(admin_article_post)

@@ -16,6 +16,7 @@ module.exports = {
     ].map(require.resolve),
     plugins: [
         'babel-plugin-transform-runtime',
-        'babel-plugin-transform-react-constant-elements'
+        'babel-plugin-transform-react-constant-elements',
+        'babel-plugin-transform-decorators-legacy'
     ].map(require.resolve)
 };

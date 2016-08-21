@@ -2,11 +2,27 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
+import {propTypes} from '../decorators'
 import * as articleActions from '../actions/article'
 import * as globalsActions from '../actions/globals'
 import {Comment} from './comment'
 
-class article extends Component {
+function mapStateToProps(state) {
+    return {
+        article: state.article.toJS().article
+    }
+}
+function mapDispatchToProps(dispatch) {
+    const _Action = Object.assign({}, articleActions, globalsActions)
+    return bindActionCreators(_Action, dispatch)
+}
+
+@propTypes({
+    article: PropTypes.object,
+    fetchArticle: PropTypes.func
+})
+@connect(mapStateToProps, mapDispatchToProps)
+export class Article extends Component {
     componentWillMount() {
         const {pathname} = this.props.article
         if (pathname !== this.props.location.pathname) this.handlefetchArticle()
@@ -60,21 +76,3 @@ class article extends Component {
         )
     }
 }
-
-article.propTypes = {
-    article: PropTypes.object,
-    fetchArticle: PropTypes.func
-}
-
-function mapStateToProps(state) {
-    return {
-        article: state.article.toJS().article
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, articleActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
-}
-
-export const Article = connect(mapStateToProps, mapDispatchToProps)(article)

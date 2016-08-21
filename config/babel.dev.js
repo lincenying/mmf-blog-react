@@ -16,6 +16,7 @@ module.exports = {
         'babel-preset-react'
     ].map(require.resolve),
     plugins: [
-        'babel-plugin-transform-runtime'
+        'babel-plugin-transform-runtime',
+        'babel-plugin-transform-decorators-legacy'
     ].map(require.resolve)
 };

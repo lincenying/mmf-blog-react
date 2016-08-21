@@ -2,10 +2,27 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
+import {propTypes} from '../decorators'
 import * as adminActions from '../actions/admin'
 import * as globalsActions from '../actions/globals'
 
-class admin_article_list extends Component {
+function mapStateToProps(state) {
+    return {
+        posts: state.admin.toJS().posts
+    }
+}
+function mapDispatchToProps(dispatch) {
+    const _Action = Object.assign({}, adminActions, globalsActions)
+    return bindActionCreators(_Action, dispatch)
+}
+
+@propTypes({
+    deleteArticle: PropTypes.func,
+    fetchAdminArticle: PropTypes.func,
+    posts: PropTypes.object
+})
+@connect(mapStateToProps, mapDispatchToProps)
+export class AdminArticleList extends Component {
     constructor(props) {
         super(props)
         this.handleDeleteArticle = this.handleDeleteArticle.bind(this)
@@ -75,21 +92,3 @@ class admin_article_list extends Component {
         )
     }
 }
-admin_article_list.propTypes = {
-    deleteArticle: PropTypes.func,
-    fetchAdminArticle: PropTypes.func,
-    posts: PropTypes.object
-}
-
-function mapStateToProps(state) {
-    return {
-        posts: state.admin.toJS().posts
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, adminActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
-}
-
-export const AdminArticleList = connect(mapStateToProps, mapDispatchToProps)(admin_article_list)

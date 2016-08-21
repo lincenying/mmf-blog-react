@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
+import {contextTypes} from '../decorators'
 
+@contextTypes({
+    router: React.PropTypes.object.isRequired
+})
 export class MenuFront extends Component {
     constructor(props) {
         super(props)
@@ -29,7 +33,4 @@ export class MenuFront extends Component {
             </div>
         )
     }
-}
-MenuFront.contextTypes = {
-    router: React.PropTypes.object.isRequired
 }

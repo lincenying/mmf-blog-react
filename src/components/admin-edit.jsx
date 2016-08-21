@@ -1,10 +1,27 @@
 import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {propTypes} from '../decorators'
 import * as adminActions from '../actions/admin'
 import * as globalsActions from '../actions/globals'
 
-class admin_article_edit extends Component {
+function mapStateToProps(state) {
+    return {
+        article: state.admin.toJS().article
+    }
+}
+function mapDispatchToProps(dispatch) {
+    const _Action = Object.assign({}, adminActions, globalsActions)
+    return bindActionCreators(_Action, dispatch)
+}
+
+@propTypes({
+    article: PropTypes.object,
+    fetchAdminArticle: PropTypes.func,
+    setMessage: PropTypes.func
+})
+@connect(mapStateToProps, mapDispatchToProps)
+export class AdminArticleEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -122,20 +139,3 @@ class admin_article_edit extends Component {
         )
     }
 }
-admin_article_edit.propTypes = {
-    article: PropTypes.object,
-    fetchAdminArticle: PropTypes.func,
-    setMessage: PropTypes.func
-}
-function mapStateToProps(state) {
-    return {
-        article: state.admin.toJS().article
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, adminActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
-}
-
-export const AdminArticleEdit = connect(mapStateToProps, mapDispatchToProps)(admin_article_edit)
