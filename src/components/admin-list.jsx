@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {Link} from 'react-router'
 import {propTypes} from '../decorators'
 import * as adminActions from '../actions/admin'
@@ -22,6 +23,7 @@ function mapDispatchToProps(dispatch) {
     posts: PropTypes.object
 })
 @connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 export class AdminArticleList extends Component {
     constructor(props) {
         super(props)

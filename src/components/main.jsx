@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import * as articleActions from '../actions/article'
 import {MainItem} from "./main-item"
@@ -19,6 +20,7 @@ function mapDispatchToProps(dispatch) {
     posts: PropTypes.object
 })
 @connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 export class Main extends Component {
     constructor(props) {
         super(props)

@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 
 export class About extends Component {
+    shouldComponentUpdate() {
+        return false
+    }
     handleSlideToggle() {
         $(".m-about").slideToggle("800")
     }

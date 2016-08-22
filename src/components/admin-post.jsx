@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import * as globalsActions from '../actions/globals'
 
@@ -12,6 +13,7 @@ function mapDispatchToProps(dispatch) {
     setMessage: React.PropTypes.func
 })
 @connect(null, mapDispatchToProps)
+@immutableRenderDecorator
 export class AdminArticlePost extends Component {
     constructor(props) {
         super(props)

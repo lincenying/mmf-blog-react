@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import * as adminActions from '../actions/admin'
 import * as globalsActions from '../actions/globals'
@@ -21,6 +22,7 @@ function mapDispatchToProps(dispatch) {
     setMessage: PropTypes.func
 })
 @connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 export class AdminArticleEdit extends Component {
     constructor(props) {
         super(props)

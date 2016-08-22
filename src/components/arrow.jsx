@@ -6,6 +6,9 @@ export class Arrow extends Component {
         this.handleGoTop = this.handleGoTop.bind(this)
         this.handleGoBack = this.handleGoBack.bind(this)
     }
+    shouldComponentUpdate () {
+        return false
+    }
     handleGoTop() {
         window.scrollTo(0, 0)
     }

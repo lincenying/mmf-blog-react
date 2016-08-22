@@ -4,7 +4,6 @@ process.env.NODE_ENV = 'production';
 
 require('shelljs/global')
 var path = require('path');
-var rimrafSync = require('rimraf').sync;
 var webpack = require('webpack');
 var config = require('../config/webpack.config.prod');
 

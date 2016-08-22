@@ -1,4 +1,4 @@
-/* global require, module, process, path */
+/* global require, module, process */
 
 var path = require('path')
 var express = require('express')
