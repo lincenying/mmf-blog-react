@@ -890,8 +890,8 @@ textarea.form-control {
 
 .example-enter {
     opacity: 0;
-    transform:   translate(-250px,0);
-    transform: translate3d(-250px,0,0);
+    transform:   translate(-100px,0);
+    transform: translate3d(-100px,0,0);
 }
 .example-enter.example-enter-active {
     opacity: 1;
@@ -900,6 +900,7 @@ textarea.form-control {
     transition-property: transform, opacity;
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+    z-index: 2
 }
 .example-leave {
     opacity: 1;
@@ -911,8 +912,9 @@ textarea.form-control {
 }
 .example-leave.example-leave-active {
     opacity: 0;
-    transform:   translate(250px,0);
-    transform: translate3d(250px,0,0);
+    transform:   translate(100px,0);
+    transform: translate3d(100px,0,0);
+    z-index: 1
 }
 
 @media screen and (max-width: 860px) {

@@ -5,6 +5,7 @@ import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import * as articleActions from '../actions/article'
 import {MainItem} from "./main-item"
+import {Footer} from '../components/footer'
 
 function mapStateToProps(state) {
     return {
@@ -69,6 +70,7 @@ export class Main extends Component {
                     <div className="w-icon w-icon-3"></div>
                     {loadMore}
                 </div>
+                <Footer />
             </div>
         )
     }

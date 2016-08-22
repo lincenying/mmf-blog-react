@@ -7,6 +7,7 @@ import {propTypes} from '../decorators'
 import * as articleActions from '../actions/article'
 import * as globalsActions from '../actions/globals'
 import {Comment} from './comment'
+import {Footer} from '../components/footer'
 
 function mapStateToProps(state) {
     return {
@@ -74,6 +75,7 @@ export class Article extends Component {
                     {next}
                 </div>
                 <Comment pathname={pathname} id={id} />
+                <Footer />
             </div>
         )
     }

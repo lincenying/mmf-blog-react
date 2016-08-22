@@ -3,7 +3,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import {About} from '../components/about'
 import {MenuFront} from '../components/menu-front'
 import {MenuAdmin} from '../components/menu-admin'
-import {Footer} from '../components/footer'
 import {Arrow} from '../components/arrow'
 import {DevTools} from '../components/devtools'
 import {Toastr} from '../components/_toastr.jsx'
@@ -28,7 +27,6 @@ export const App = props => {
                 })
             }
             </ReactCSSTransitionGroup>
-            <Footer />
             <Arrow />
             <DevTools />
             <Toastr />
