@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import Link from 'react-router/lib/Link'
 
 export class MainItem extends Component {
     constructor(props) {

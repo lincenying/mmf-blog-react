@@ -888,10 +888,14 @@ textarea.form-control {
     background-position: -50px -50px;
 }
 
+.g-mn {
+    position: absolute;
+    width: 860px;
+}
 .example-enter {
     opacity: 0;
-    transform:   translate(-100px,0);
-    transform: translate3d(-100px,0,0);
+    transform:   translate(-200px,0);
+    transform: translate3d(-200px,0,0);
 }
 .example-enter.example-enter-active {
     opacity: 1;
@@ -912,8 +916,8 @@ textarea.form-control {
 }
 .example-leave.example-leave-active {
     opacity: 0;
-    transform:   translate(100px,0);
-    transform: translate3d(100px,0,0);
+    transform:   translate(0, -200px);
+    transform: translate3d(0, -200px,0);
     z-index: 1
 }
 

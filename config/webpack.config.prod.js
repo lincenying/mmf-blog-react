@@ -33,7 +33,13 @@ module.exports = {
     entry: {
         app: path.join(srcPath, 'index'),
         login: path.join(srcPath, 'login'),
-        vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
+        vendor: ['react', 'react-dom',
+            'react-router/lib/browserHistory',
+            'react-router/lib/IndexRoute',
+            'react-router/lib/Route',
+            'react-router/lib/Router',
+            'react-router/lib/Link', 
+            'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
     },
     output: {
         path: buildPath,

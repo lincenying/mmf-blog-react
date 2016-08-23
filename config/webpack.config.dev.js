@@ -38,7 +38,13 @@ var config = {
         login: [
             path.join(srcPath, 'login.jsx')
         ],
-        vendor: ['react', 'react-dom', 'react-router', 'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
+        vendor: ['react', 'react-dom',
+            'react-router/lib/browserHistory',
+            'react-router/lib/IndexRoute',
+            'react-router/lib/Route',
+            'react-router/lib/Router',
+            'react-router/lib/Link',
+            'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
     },
     output: {
         // Next line is not used in dev but WebpackDevServer crashes without it:
