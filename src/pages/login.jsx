@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
+import {propTypes} from '../decorators'
 import {DevTools} from '../components/devtools'
 import {Toastr} from '../components/_toastr.jsx'
 import * as globalsActions from '../actions/globals'
@@ -11,7 +13,16 @@ import '../html/css/nprogress.css'
 import '../html/css/animate.min.css'
 import '../html/css/toastr.min.css'
 
-export class login extends Component {
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(globalsActions, dispatch)
+}
+
+@propTypes({
+    setMessage: React.PropTypes.func
+})
+@connect(null, mapDispatchToProps)
+@immutableRenderDecorator
+export class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,10 +30,15 @@ export class login extends Component {
             password: '',
             remember_me: ''
         }
+        this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    handleChange(type, event) {
-        this.setState({[type]: event.target.value})
+    handleChange(e) {
+        const id = e.target.name,
+            value = e.target.value
+        const state = this.state
+        state[id] = value
+        this.setState(state)
     }
     handleSubmit(event) {
         event.preventDefault()
@@ -58,11 +74,11 @@ export class login extends Component {
                 <div className="login">
                     <h1>后台管理</h1>
                     <form onSubmit={this.handleSubmit} id="shake-setting" action="/api/?action=login" method="post">
-                        <p><input value={this.state.username} onChange={this.handleChange.bind(this, 'username')} type="text" name="username" placeholder="请输入用户名" /></p>
-                        <p><input value={this.state.password} onChange={this.handleChange.bind(this, 'password')} type="password" name="password" placeholder="请输入密码" /></p>
+                        <p><input value={this.state.username} onChange={this.handleChange} type="text" id="username" name="username" placeholder="请输入用户名" /></p>
+                        <p><input value={this.state.password} onChange={this.handleChange} type="password" id="password" name="password" placeholder="请输入密码" /></p>
                         <p className="remember_me">
                             <label>
-                                <input checked={this.state.remember_me} onChange={this.handleChange.bind(this, 'remember_me')} value="on" type="checkbox" name="remember_me" id="remember_me" />
+                                <input checked={this.state.remember_me} onChange={this.handleChange} value="on" type="checkbox" id="remember_me" name="remember_me" />
                                 保持登录
                             </label>
                         </p>
@@ -75,9 +91,3 @@ export class login extends Component {
         )
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(globalsActions, dispatch)
-}
-
-export const Login = connect(null, mapDispatchToProps)(login)

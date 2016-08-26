@@ -11,7 +11,7 @@ export class About extends Component {
         return (
             <div>
                 <div className="box m-tit">
-                    <h1><a onClick={this.handleSlideToggle} href="javascript:;"></a></h1>
+                    <h1><a onClick={this.handleSlideToggle} href="javascript:;" /></h1>
                     <a onClick={this.handleSlideToggle} href="javascript:;" className="w-icon">{'查看个人介绍'}</a>
                 </div>
                 <div className="box box-do m-about">

@@ -128,7 +128,7 @@ export class AdminArticleEdit extends Component {
                             </select>
                         </section>
                         <section id="edit-content">
-                            <textarea value={this.state.content} onChange={this.handleChange} id="editor" name="content" className="form-control hidden" data-autosave="editor-content"></textarea>
+                            <textarea value={this.state.content} onChange={this.handleChange} id="editor" name="content" className="form-control hidden" data-autosave="editor-content" />
                         </section>
                         <section id="edit-submit">
                             <input type="hidden" name="action" value="modify" />
