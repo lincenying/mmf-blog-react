@@ -19,6 +19,7 @@ export class login extends Component {
             password: '',
             remember_me: ''
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleChange(type, event) {
         this.setState({[type]: event.target.value})
