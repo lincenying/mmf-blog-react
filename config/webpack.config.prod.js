@@ -32,14 +32,7 @@ module.exports = {
     devtool: false,
     entry: {
         app: path.join(srcPath, 'index'),
-        login: path.join(srcPath, 'login'),
-        vendor: ['react', 'react-dom',
-            'react-router/lib/browserHistory',
-            'react-router/lib/IndexRoute',
-            'react-router/lib/Route',
-            'react-router/lib/Router',
-            'react-router/lib/Link', 
-            'react-redux', 'redux', 'react-redux', 'react-router-redux', 'immutable', 'redux-immutablejs']
+        login: path.join(srcPath, 'login')
     },
     output: {
         path: buildPath,
@@ -68,6 +61,7 @@ module.exports = {
         loaders: [{
             test: /\.js|\.jsx$/,
             include: srcPath,
+            exclude: /node_modules/,
             loader: 'babel',
             query: require('./babel.prod')
         }, {
@@ -102,10 +96,9 @@ module.exports = {
         return [autoprefixer];
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'static/js/[name].[chunkhash].js'),
         new HtmlWebpackPlugin({
             inject: true,
-            chunks: ['vendor', 'polyfill', 'app'],
+            chunks: ['polyfill', 'app'],
             filename: 'index.html',
             template: 'index.html',
             favicon: faviconPath,
@@ -124,7 +117,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             inject: true,
-            chunks: ['vendor', 'login'],
+            chunks: ['login'],
             filename: 'login.html',
             template: 'login.html',
             favicon: faviconPath,
@@ -164,6 +157,10 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
+        }),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname, "../src"),
+            manifest: require("../static/vendor-manifest.json")
         })
     ]
 };

@@ -17,13 +17,16 @@ vue2-template 服务端渲染: [https://github.com/lincenying/mmf-blog-vue2-ssr]
 先安装 api server: https://github.com/lincenying/mmf-blog-api
 
 ```
-// 安装依赖
+// 1. 安装依赖
 npm install
 
-// 生成静态文件
+// 2. 利用DllPlugin打包依赖库 (当src/vendors.js里的依赖库没有更新, 则不需要重复执行该命令)
+npm run dll
+
+// 3.1 生成静态文件
 npm run build
 
-// 开发模式
+// 3.2 开发模式
 npm run dev
 
 或者

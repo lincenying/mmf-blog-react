@@ -73,6 +73,6 @@
     "build": "node scripts/build.js --debug-template",
     "start": "node scripts/start.js --debug-template",
     "dev": "node scripts/dev.js",
-    "server": "node server.js"
+    "dll": "webpack --config config/webpack.config.dll.js"
   }
 }
