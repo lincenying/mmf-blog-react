@@ -27,7 +27,7 @@ var srcPath = path.resolve(__dirname, relativePath, 'src');
 var nodeModulesPath = path.join(__dirname, '..', 'node_modules');
 var indexHtmlPath = path.resolve(__dirname, relativePath, 'index.html');
 var faviconPath = path.resolve(__dirname, relativePath, 'favicon.ico');
-var buildPath = path.join(__dirname, isInNodeModules ? '../../..' : '..', 'build');
+var buildPath = path.join(__dirname, isInNodeModules ? '../../..' : '..', 'dist');
 
 var config = {
     devtool: 'eval',

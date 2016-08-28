@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {Field, reduxForm} from 'redux-form'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import {DevTools} from '../components/devtools'
 import {Toastr} from '../components/_toastr.jsx'
+import {renderInput} from '../components/_renderField.jsx' //eslint-disable-line
 import * as globalsActions from '../actions/globals'
 import api from '../api'
 
@@ -17,10 +19,25 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(globalsActions, dispatch)
 }
 
+const validate = values => {
+    const errors = {}
+    if (!values.username) {
+        errors.username = '请输入用户名'
+    }
+    if (!values.password) {
+        errors.password = '请输入密码'
+    }
+    return errors
+}
+
 @propTypes({
     setMessage: React.PropTypes.func
 })
 @connect(null, mapDispatchToProps)
+@reduxForm({
+    form:'login',
+    validate
+})
 @immutableRenderDecorator
 export class Login extends Component {
     constructor(props) {
@@ -30,30 +47,13 @@ export class Login extends Component {
             password: '',
             remember_me: ''
         }
-        this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    handleChange(e) {
-        const id = e.target.name,
-            value = e.target.value
-        const state = this.state
-        state[id] = value
-        this.setState(state)
-    }
-    handleSubmit(event) {
-        event.preventDefault()
+    handleSubmit(values) {
         const {setMessage} = this.props
-        const {username, password} = this.state
-        if (username === '' || password === '') {
-            setMessage({
-                type: 'error',
-                content: '请输入用户名和密码!'
-            })
-            return false
-        }
         api.getData({
             action: 'login',
-            ...this.state
+            ...values
         }).then(json => {
             if (json.code === 200) {
                 setMessage('登录成功!')
@@ -69,20 +69,21 @@ export class Login extends Component {
         })
     }
     render() {
+        const { handleSubmit, pristine, submitting } = this.props
         return (
             <section className="container">
                 <div className="login">
                     <h1>后台管理</h1>
-                    <form onSubmit={this.handleSubmit} id="shake-setting" action="/api/?action=login" method="post">
-                        <p><input value={this.state.username} onChange={this.handleChange} type="text" id="username" name="username" placeholder="请输入用户名" /></p>
-                        <p><input value={this.state.password} onChange={this.handleChange} type="password" id="password" name="password" placeholder="请输入密码" /></p>
+                    <form onSubmit={handleSubmit(this.handleSubmit)} id="shake-setting" action="/api/?action=login" method="post">
+                        <Field component={renderInput} type="text" id="username" name="username" label="请输入用户名" />
+                        <Field component={renderInput} type="password" id="password" name="password" label="请输入密码" />
                         <p className="remember_me">
                             <label>
-                                <input checked={this.state.remember_me} onChange={this.handleChange} value="on" type="checkbox" id="remember_me" name="remember_me" />
+                                <Field component="input" value="on" type="checkbox" id="remember_me" name="remember_me" />
                                 保持登录
                             </label>
                         </p>
-                        <p className="submit"><input type="submit" value="登录" /></p>
+                        <p className="submit"><input disabled={pristine || submitting} type="submit" value="登录" /></p>
                     </form>
                 </div>
                 <DevTools />

@@ -20,6 +20,7 @@
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
+    "redux-form": "^6.0.1",
     "redux-immutablejs": "^0.0.8",
     "redux-thunk": "^2.1.0"
   },
@@ -73,6 +74,6 @@
     "build": "node scripts/build.js --debug-template",
     "start": "node scripts/start.js --debug-template",
     "dev": "node scripts/dev.js",
-    "dll": "webpack --config config/webpack.config.dll.js"
+    "dll": "node scripts/dll.js"
   }
 }

@@ -9,9 +9,9 @@ var config = require('../config/webpack.config.prod');
 
 var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relative = isInNodeModules ? '../..' : '.';
-rm('-rf', relative + '/build')
-mkdir('-p', relative + '/build/static')
-cp('-R', 'static/', relative + '/build/')
+rm('-rf', relative + '/dist')
+mkdir('-p', relative + '/dist/static')
+cp('-R', 'static/', relative + '/dist/')
 
 webpack(config).run(function(err, stats) {
     if (err) {
@@ -24,7 +24,7 @@ webpack(config).run(function(err, stats) {
     console.log('Successfully generated a bundle in the build folder!');
     console.log();
     console.log('You can now serve it with any static server, for example:');
-    console.log('  cd build');
+    console.log('  cd dist');
     console.log('  npm install -g http-server');
     console.log('  hs');
     console.log('  ' + openCommand + ' http://localhost:8080');

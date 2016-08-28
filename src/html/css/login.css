@@ -157,10 +157,15 @@ body {
     box-shadow: 0 1px whitesmoke;
 }
 .login p {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
 }
 .login p:first-child {
     margin-top: 0;
+}
+.login p span {
+    display: inline-block;
+    color: red;
+    padding-top: 10px;
 }
 .login input[type=text], .login input[type=password] {
     width: 278px;
@@ -232,6 +237,11 @@ input[type=text], input[type=password] {
 input[type=text]:focus, input[type=password]:focus {
     border-color: #7dc9e2;
     outline-color: #dceefc;
+    outline-offset: 0;
+}
+.error input[type=text], .error input[type=password] {
+    border-color: rgba(255, 0, 0, 0.4);
+    outline-color: rgba(255, 0, 0, 0.2);
     outline-offset: 0;
 }
 
