@@ -17,6 +17,13 @@ webpack(config).run(function(err, stats) {
         console.error(err.message || err);
         process.exit(1);
     }
+    process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+    }) + '\n')
 
     console.log('Successfully generated a bundle in the static folder!');
 });

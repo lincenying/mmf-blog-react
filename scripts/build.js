@@ -19,6 +19,13 @@ webpack(config).run(function(err, stats) {
         console.error(err.message || err);
         process.exit(1);
     }
+    process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+    }) + '\n')
 
     var openCommand = process.platform === 'win32' ? 'start' : 'open';
     console.log('Successfully generated a bundle in the build folder!');
