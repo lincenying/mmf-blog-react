@@ -77,32 +77,22 @@ module.exports = {
         return [autoprefixer];
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            inject: true,
-            chunks: ['polyfill', 'app'],
-            filename: 'index.html',
-            template: 'index.html',
-            favicon: faviconPath,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true
-            }
-        }),
-        new HtmlWebpackPlugin({
-            inject: true,
-            chunks: ['login'],
-            filename: 'login.html',
-            template: 'login.html',
-            favicon: faviconPath,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true
-            }
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
+        }),
+        new ExtractTextPlugin('static/css/[name].[contenthash].css'),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname, "../src"),
+            manifest: require("../static/vendor-manifest.json")
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "commons",
+            chunks: ["app", "login"]
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
@@ -119,15 +109,29 @@ module.exports = {
                 //screw_ie8: true
             }
         }),
-        new ExtractTextPlugin('static/css/[name].[contenthash].css'),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: ['commons', 'app'],
+            filename: 'index.html',
+            template: 'index.html',
+            favicon: faviconPath,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true
+            }
         }),
-        new webpack.DllReferencePlugin({
-            context: path.resolve(__dirname, "../src"),
-            manifest: require("../static/vendor-manifest.json")
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: ['commons', 'login'],
+            filename: 'login.html',
+            template: 'login.html',
+            favicon: faviconPath,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true
+            }
         })
     ]
 };

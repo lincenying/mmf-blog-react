@@ -77,8 +77,21 @@ var config = {
         return [autoprefixer];
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': '"development"'
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname, "../src"),
+            manifest: require("../static/vendor-manifest.json")
+        }),
         new HtmlWebpackPlugin({
-            chunks: ['polyfill', 'app'],
+            chunks: ['app'],
             filename: 'index.html',
             template: 'index.html',
             inject: true
@@ -88,19 +101,6 @@ var config = {
             filename: 'login.html',
             template: 'login.html',
             inject: true
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"development"'
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
-        }),
-        new webpack.DllReferencePlugin({
-            context: path.resolve(__dirname, "../src"),
-            manifest: require("../static/vendor-manifest.json")
         })
     ]
 };
