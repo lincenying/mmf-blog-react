@@ -103,7 +103,7 @@ export class AdminArticlePost extends Component {
                             </select>
                         </section>
                         <section id="post-content">
-                            <textarea id="editor" name="content" className="form-control hidden" data-autosave="editor-content"></textarea>
+                            <textarea id="editor" name="content" className="form-control hidden" data-autosave="editor-content" />
                         </section>
                         <section id="post-submit">
                             <input type="hidden" name="action" value="post" />

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import Link from 'react-router/lib/Link'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 
+@immutableRenderDecorator
 export class MainItem extends Component {
     constructor(props) {
         super(props)
@@ -27,11 +29,11 @@ export class MainItem extends Component {
                 <div className="cont cont-1">
                     <div className="text">
                         <h2><Link to={`/article/${item._id}`}>{item.title}</Link></h2>
-                        <div className={!this.state.showMore ? "markdown-body showless" : "markdown-body"} dangerouslySetInnerHTML={{__html: item.content}}></div>
+                        <div className={!this.state.showMore ? "markdown-body showless" : "markdown-body"} dangerouslySetInnerHTML={{__html: item.content}} />
                         <div className="more-less">{btn}</div>
                     </div>
                 </div>
-                <div className="info info-1"></div>
+                <div className="info info-1" />
             </div>
         )
     }

@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import Link from 'react-router/lib/Link'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {contextTypes} from '../decorators'
 
 @contextTypes({
     router: React.PropTypes.object.isRequired
 })
+@immutableRenderDecorator
 export class MenuFront extends Component {
     constructor(props) {
         super(props)
@@ -24,10 +26,10 @@ export class MenuFront extends Component {
                 </div>
                 <div className="m-nav">
                     <ul className="menuOpen">
-                        <li className="tag-all"><Link activeClassName="v-link-active" to="/" onlyActiveOnIndex><i></i>All</Link></li>
-                        <li className="tag-life"><Link activeClassName="v-link-active" to={`/category/1`}><i></i>Life</Link></li>
-                        <li className="tag-study"><Link activeClassName="v-link-active" to={`/category/2`}><i></i>Study</Link></li>
-                        <li className="tag-other"><Link activeClassName="v-link-active" to={`/category/3`}><i></i>Other</Link></li>
+                        <li className="tag-all"><Link activeClassName="v-link-active" to="/" onlyActiveOnIndex><i />All</Link></li>
+                        <li className="tag-life"><Link activeClassName="v-link-active" to={`/category/1`}><i />Life</Link></li>
+                        <li className="tag-study"><Link activeClassName="v-link-active" to={`/category/2`}><i />Study</Link></li>
+                        <li className="tag-other"><Link activeClassName="v-link-active" to={`/category/3`}><i />Other</Link></li>
                     </ul>
                 </div>
             </div>

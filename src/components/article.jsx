@@ -62,15 +62,15 @@ export class Article extends Component {
                         <div className="cont cont-1">
                             <div className="text">
                                 <h2><Link to={`/article/${article.data._id}`}>{article.data.title}</Link></h2>
-                                <div className="markdown-body" dangerouslySetInnerHTML={{__html: article.data.content}}></div>
+                                <div className="markdown-body" dangerouslySetInnerHTML={{__html: article.data.content}} />
                             </div>
                         </div>
-                        <div className="info info-1"></div>
+                        <div className="info info-1" />
                     </div>
                 </div>
                 <div className="box m-page box-do">
-                    <div className="w-icon w-icon-2"></div>
-                    <div className="w-icon w-icon-3"></div>
+                    <div className="w-icon w-icon-2" />
+                    <div className="w-icon w-icon-3" />
                     {prev}
                     {next}
                 </div>

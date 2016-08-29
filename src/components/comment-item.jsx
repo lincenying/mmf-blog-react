@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 
+@immutableRenderDecorator
 export class CommentItem extends Component {
     constructor(props) {
         super(props)

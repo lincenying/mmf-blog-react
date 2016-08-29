@@ -85,8 +85,8 @@ export class AdminArticleList extends Component {
                     </ul>
                 </div>
                 <div className="box m-page box-do">
-                    <div className="w-icon w-icon-2"></div>
-                    <div className="w-icon w-icon-3"></div>
+                    <div className="w-icon w-icon-2" />
+                    <div className="w-icon w-icon-3" />
                     {posts.hasPrev ? <Link to={`/admin/list/${posts.page - 1}`} className="prev">上一页</Link> : ''}
                     {posts.hasNext ? <Link to={`/admin/list/${posts.page + 1}`} className="next">下一页</Link> : ''}
                 </div>

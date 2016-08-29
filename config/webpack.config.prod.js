@@ -1,22 +1,10 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// TODO: hide this behind a flag and eliminate dead code on eject.
-// This shouldn't be exposed to the user.
-var isInNodeModules = 'node_modules' ===
-    path.basename(path.resolve(path.join(__dirname, '..', '..')));
+var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relativePath = isInNodeModules ? '../../..' : '..';
 if (process.argv[2] === '--debug-template') {
     relativePath = '..';
@@ -38,8 +26,6 @@ module.exports = {
         path: buildPath,
         filename: 'static/js/[name].[chunkhash].js',
         chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
-        // TODO: this wouldn't work for e.g. GH Pages.
-        // Good news: we can infer it from package.json :-)
         publicPath: '/'
     },
     externals: {
@@ -67,9 +53,6 @@ module.exports = {
         }, {
             test: /\.css$/,
             include: srcPath,
-            // Disable autoprefixer in css-loader itself:
-            // https://github.com/webpack/css-loader/issues/281
-            // We already have it thanks to postcss.
             loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
         }, {
             test: /\.json$/,
@@ -87,8 +70,6 @@ module.exports = {
         }]
     },
     eslint: {
-        // TODO: consider separate config for production,
-        // e.g. to enable no-console and no-debugger only in prod.
         configFile: path.join(__dirname, 'eslint.js'),
         useEslintrc: false
     },
@@ -105,14 +86,7 @@ module.exports = {
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true
+                removeRedundantAttributes: true
             }
         }),
         new HtmlWebpackPlugin({
@@ -124,14 +98,7 @@ module.exports = {
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true
+                removeRedundantAttributes: true
             }
         }),
         new webpack.DefinePlugin({

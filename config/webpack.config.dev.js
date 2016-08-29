@@ -1,21 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// TODO: hide this behind a flag and eliminate dead code on eject.
-// This shouldn't be exposed to the user.
-var isInNodeModules = 'node_modules' ===
-    path.basename(path.resolve(path.join(__dirname, '..', '..')));
+var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relativePath = isInNodeModules ? '../../..' : '..';
 var isInDebugMode = process.argv.some(arg =>
     arg.indexOf('--debug-template') > -1
@@ -40,7 +28,6 @@ var config = {
         ]
     },
     output: {
-        // Next line is not used in dev but WebpackDevServer crashes without it:
         path: buildPath,
         pathinfo: true,
         filename: '[name].js',
@@ -105,7 +92,6 @@ var config = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"development"'
         }),
-        // Note: only CSS is currently hot reloaded
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
             $: 'jquery',

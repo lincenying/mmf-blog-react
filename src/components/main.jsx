@@ -66,8 +66,8 @@ export class Main extends Component {
                     {lists}
                 </div>
                 <div className="box m-page box-do">
-                    <div className="w-icon w-icon-2"></div>
-                    <div className="w-icon w-icon-3"></div>
+                    <div className="w-icon w-icon-2" />
+                    <div className="w-icon w-icon-3" />
                     {loadMore}
                 </div>
                 <Footer />

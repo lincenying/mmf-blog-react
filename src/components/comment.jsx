@@ -94,11 +94,11 @@ export class Comment extends Component {
                         <div className="s-fc0 ztag ztag_tips">由于该用户的权限设置，您暂时无法进行评论...</div>
                         <div className="bcmtadd">
                             <input value={this.state.username} onChange={this.handleChange} id="username" type="text" className="form-control" placeholder="请输入昵称" />
-                            <textarea value={this.state.content} onChange={this.handleChange} id="content" className="form-control" placeholder="请输入评论内容"></textarea>
+                            <textarea value={this.state.content} onChange={this.handleChange} id="content" className="form-control" placeholder="请输入评论内容" />
                             <div className="bcmtbtn">
                                 <span className="ztag ztag_tips">提示</span>
                                 <button onClick={this.handlePostComment} className="s-bd1 s-fc1 s-bg1 ztag">发布</button>
-                                <div className="txt s-fc0"></div>
+                                <div className="txt s-fc0" />
                             </div>
                         </div>
                         <div className="bcmtlst">
