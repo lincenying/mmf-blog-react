@@ -36,6 +36,7 @@
     "babel-preset-es2016": "^6.11.3",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.13.0",
+    "browserslist": "^1.3.6",
     "bundle-deps": "^1.0.0",
     "chalk": "^1.1.3",
     "cross-spawn": "^4.0.0",

@@ -1,5 +1,6 @@
 var path = require('path');
 var autoprefixer = require('autoprefixer');
+var browserslist = require('browserslist')
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -57,7 +58,10 @@ var config = {
             query: require('./babel.dev')
         }, {
             test: /\.css$/,
-            loader: 'style!css!postcss'
+            loader: 'style!css?-autoprefixer!postcss'
+        },  {
+            test: /\.less/,
+            loader: 'style!css?-autoprefixer!postcss!less'
         }, {
             test: /\.json$/,
             loader: 'json'
@@ -73,15 +77,7 @@ var config = {
         useEslintrc: true
     },
     postcss: [
-        autoprefixer({ browsers: [
-            'ie >= 8',
-            'ie_mob >= 10',
-            'ff >= 26',
-            'chrome >= 30',
-            'safari >= 7',
-            'ios >= 7',
-            'android >= 2.3'
-        ]})
+        autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')})
     ],
     plugins: [
         new webpack.DefinePlugin({

@@ -1,5 +1,6 @@
 var path = require('path');
 var autoprefixer = require('autoprefixer');
+var browserslist = require('browserslist')
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -53,7 +54,11 @@ module.exports = {
         }, {
             test: /\.css$/,
             include: srcPath,
-            loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
+            loader: ExtractTextPlugin.extract(['css?-autoprefixer', 'postcss'])
+        },  {
+            test: /\.less/,
+            include: srcPath,
+            loader: ExtractTextPlugin.extract(['css?-autoprefixer', 'postcss', 'less'])
         }, {
             test: /\.json$/,
             loader: 'json'
@@ -73,15 +78,7 @@ module.exports = {
         useEslintrc: true
     },
     postcss: [
-        autoprefixer({ browsers: [
-            'ie >= 8',
-            'ie_mob >= 10',
-            'ff >= 26',
-            'chrome >= 30',
-            'safari >= 7',
-            'ios >= 7',
-            'android >= 2.3'
-        ]})
+        autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')})
     ],
     plugins: [
         new webpack.ProvidePlugin({
