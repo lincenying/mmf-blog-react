@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {ToastMessage, ToastContainer} from 'react-toastr'
-import * as articleActions from '../actions/globals'
+import * as articleActions from 'redux-store-actions/globals'
 var ToastMessageFactory = React.createFactory(ToastMessage.animation)
 
 class toastr extends Component {

@@ -1,4 +1,4 @@
-import api from '../api'
+import api from 'api'
 
 export const RECEIVE_ADMIN_POSTS = 'RECEIVE_ADMIN_POSTS'
 export const RECEIVE_ADMIN_ARTICLE = 'RECEIVE_ADMIN_ARTICLE'

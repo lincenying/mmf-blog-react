@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import Link from 'react-router/lib/Link'
 import {propTypes} from '../decorators'
-import * as adminActions from '../actions/admin'
-import * as globalsActions from '../actions/globals'
+import * as adminActions from 'redux-store-actions/admin'
+import * as globalsActions from 'redux-store-actions/globals'
 
 function mapStateToProps(state) {
     return {

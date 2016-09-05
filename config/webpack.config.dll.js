@@ -1,14 +1,19 @@
-var path = require("path");
-var webpack = require("webpack");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require("path")
+var webpack = require("webpack")
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+
+var srcPath = path.join(__dirname, "../src")
+var staticPath = path.join(__dirname, "../static")
+var dllPath = '/static/dll/'
+
 module.exports = {
     entry: {
-        vendor: [path.join(__dirname, "../src", "vendors.js")]
+        vendor: [path.join(srcPath, "vendors.js")]
     },
     output: {
-        path: path.join(__dirname, "../static", "dll"),
+        path: path.join(staticPath, "dll"),
         filename: "[name].[chunkhash].js",
-        publicPath: '/static/dll/',
+        publicPath: dllPath,
         library: "[name]"
     },
     plugins: [
@@ -16,22 +21,17 @@ module.exports = {
             'process.env.NODE_ENV': '"production"'
         }),
         new webpack.DllPlugin({
-            path: path.join(__dirname, "../static", "[name]-manifest.json"),
+            path: path.join(staticPath, "[name]-manifest.json"),
             name: "[name]",
-            context: path.resolve(__dirname, "../src")
+            context: srcPath
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
-                //screw_ie8: true,
                 warnings: false
             },
-            mangle: {
-                //screw_ie8: true
-            },
             output: {
-                comments: false,
-                //screw_ie8: true
+                comments: false
             }
         }),
         new HtmlWebpackPlugin({

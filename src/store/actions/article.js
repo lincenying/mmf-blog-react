@@ -1,4 +1,4 @@
-import api from '../api'
+import api from 'api'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'

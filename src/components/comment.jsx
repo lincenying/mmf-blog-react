@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {propTypes} from '../decorators'
-import * as articleActions from '../actions/article'
-import * as globalsActions from '../actions/globals'
+import * as articleActions from 'redux-store-actions/article'
+import * as globalsActions from 'redux-store-actions/globals'
 import {CommentItem} from "./comment-item"
 import api from '../api'
 

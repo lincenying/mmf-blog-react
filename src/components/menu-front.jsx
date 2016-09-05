@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 import Link from 'react-router/lib/Link'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
-import {contextTypes} from '../decorators'
 
-@contextTypes({
-    router: React.PropTypes.object.isRequired
-})
 @immutableRenderDecorator
 export class MenuFront extends Component {
     constructor(props) {
@@ -15,7 +11,7 @@ export class MenuFront extends Component {
     handleSearch(e) {
         var qs = e.target.value
         if (e.keyCode === 13 && qs !== '') {
-            this.context.router.push('/search/'+qs)
+            this._reactInternalInstance._context.router.push('/search/'+qs)
         }
     }
     render() {

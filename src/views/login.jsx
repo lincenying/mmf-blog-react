@@ -7,7 +7,7 @@ import {propTypes} from '../decorators'
 import {DevTools} from '../components/devtools'
 import {Toastr} from '../components/_toastr.jsx'
 import {renderInput} from '../components/_renderField.jsx' //eslint-disable-line
-import * as globalsActions from '../actions/globals'
+import * as globalsActions from 'redux-store-actions/globals'
 import api from '../api'
 
 import '../html/css/login.css'

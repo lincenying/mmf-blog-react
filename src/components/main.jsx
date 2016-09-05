@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
-import * as articleActions from '../actions/article'
+import * as articleActions from 'redux-store-actions/article'
 import {MainItem} from "./main-item"
 import {Footer} from '../components/footer'
 
