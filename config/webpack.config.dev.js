@@ -15,7 +15,7 @@ var config = merge(baseWebpackConfig, {
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
             loader: 'file',
-        }, ]
+        }]
     },
     plugins: [
         new webpack.DefinePlugin({
