@@ -1,9 +1,4 @@
-import {
-    RECEIVE_ADMIN_POSTS,
-    RECEIVE_ADMIN_ARTICLE,
-    RCOVER_ARTICLE,
-    DELETE_ARTICLE
-} from '../actions/admin'
+import {RECEIVE_ADMIN_POSTS, RECEIVE_ADMIN_ARTICLE, RCOVER_ARTICLE, DELETE_ARTICLE} from 'alias-store-actions/admin'
 import { createReducer } from 'redux-immutablejs'
 import { fromJS } from 'immutable'
 

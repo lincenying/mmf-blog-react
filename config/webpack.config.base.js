@@ -35,10 +35,10 @@ var config = {
     },
     resolve: {
         alias: {
-            "redux-store": path.join(__dirname, "../src/store"),
-            "redux-store-actions": path.join(__dirname, "../src/store/actions"),
-            "redux-store-reducers": path.join(__dirname, "../src/store/reducers"),
-            "api": path.join(__dirname, "../src/api")
+            "alias-store": path.join(__dirname, "../src/store"),
+            "alias-store-actions": path.join(__dirname, "../src/store/actions"),
+            "alias-store-reducers": path.join(__dirname, "../src/store/reducers"),
+            "alias-api": path.join(__dirname, "../src/api")
         },
         extensions: ['', '.js', '.jsx']
     },
@@ -56,8 +56,7 @@ var config = {
             test: /\.js|\.jsx$/,
             include: srcPath,
             exclude: /node_modules/,
-            loader: 'babel',
-            query: require('./babel.dev')
+            loader: 'babel'
         }, {
             test: /\.json$/,
             loader: 'json'

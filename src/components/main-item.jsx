@@ -1,7 +1,11 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import Link from 'react-router/lib/Link'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
+import {propTypes} from '../decorators'
 
+@propTypes({
+    list: PropTypes.object
+})
 @immutableRenderDecorator
 export class MainItem extends Component {
     constructor(props) {

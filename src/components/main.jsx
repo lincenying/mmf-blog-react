@@ -3,9 +3,9 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
-import * as articleActions from 'redux-store-actions/article'
+import {fetchPosts} from 'alias-store-actions/article'
 import {MainItem} from "./main-item"
-import {Footer} from '../components/footer'
+import {Footer} from './footer'
 
 function mapStateToProps(state) {
     return {
@@ -13,11 +13,11 @@ function mapStateToProps(state) {
     }
 }
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(articleActions, dispatch)
+    return bindActionCreators({fetchPosts}, dispatch)
 }
 
 @propTypes({
-    fetchPosts: PropTypes.func,
+    fetchPosts: PropTypes.func.isRequired,
     posts: PropTypes.object
 })
 @connect(mapStateToProps, mapDispatchToProps)

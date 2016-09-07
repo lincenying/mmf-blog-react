@@ -4,10 +4,9 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import Link from 'react-router/lib/Link'
 import {propTypes} from '../decorators'
-import * as articleActions from 'redux-store-actions/article'
-import * as globalsActions from 'redux-store-actions/globals'
+import {fetchArticle} from 'alias-store-actions/article'
 import {Comment} from './comment'
-import {Footer} from '../components/footer'
+import {Footer} from './footer'
 
 function mapStateToProps(state) {
     return {
@@ -15,13 +14,12 @@ function mapStateToProps(state) {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, articleActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
+    return bindActionCreators({fetchArticle}, dispatch)
 }
 
 @propTypes({
     article: PropTypes.object,
-    fetchArticle: PropTypes.func
+    fetchArticle: PropTypes.func.isRequired
 })
 @connect(mapStateToProps, mapDispatchToProps)
 @immutableRenderDecorator

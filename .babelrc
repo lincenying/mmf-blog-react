@@ -1,0 +1,14 @@
+{
+    "presets": ["es2015", "es2016", "stage-2", "react"],
+    "plugins": [
+        "transform-decorators-legacy", ["transform-runtime", {
+            "polyfill": true,
+            "regenerator": true
+        }]
+    ],
+    "env": {
+        "production": {
+            "plugins": ["transform-react-constant-elements"]
+        }
+    }
+}

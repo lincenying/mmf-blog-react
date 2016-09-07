@@ -6,8 +6,8 @@ import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import {DevTools} from '../components/devtools'
 import {Toastr} from '../components/_toastr.jsx'
-import {renderInput} from '../components/_renderField.jsx' //eslint-disable-line
-import * as globalsActions from 'redux-store-actions/globals'
+import {renderInput} from '../components/_renderField.jsx'
+import {setMessage} from 'alias-store-actions/globals'
 import api from '../api'
 
 import '../html/css/login.css'
@@ -16,7 +16,7 @@ import '../html/css/animate.min.css'
 import '../html/css/toastr.min.css'
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(globalsActions, dispatch)
+    return bindActionCreators({setMessage}, dispatch)
 }
 
 const validate = values => {
@@ -31,7 +31,8 @@ const validate = values => {
 }
 
 @propTypes({
-    setMessage: React.PropTypes.func
+    setMessage: React.PropTypes.func,
+    handleSubmit: React.PropTypes.func
 })
 @connect(null, mapDispatchToProps)
 @reduxForm({

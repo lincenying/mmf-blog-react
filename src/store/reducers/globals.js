@@ -1,6 +1,4 @@
-import {
-    INCREMENT_MESSAGE
-} from '../actions/globals'
+import {INCREMENT_MESSAGE} from 'alias-store-actions/globals'
 import { createReducer } from 'redux-immutablejs'
 import { fromJS } from 'immutable'
 

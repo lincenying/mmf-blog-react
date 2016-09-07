@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {propTypes} from '../decorators'
-import * as articleActions from 'redux-store-actions/article'
-import * as globalsActions from 'redux-store-actions/globals'
+import {fetchComment, postComment} from 'alias-store-actions/article'
+import {setMessage} from 'alias-store-actions/admin'
 import {CommentItem} from "./comment-item"
 import api from '../api'
 
@@ -11,14 +11,14 @@ function mapStateToProps(state) {
     return {comment: state.article.toJS().comment}
 }
 function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, articleActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
+    return bindActionCreators({fetchComment, postComment, setMessage}, dispatch)
 }
 
 @propTypes({
     comment: PropTypes.object,
-    fetchComment: PropTypes.func,
-    postComment: PropTypes.func
+    fetchComment: PropTypes.func.isRequired,
+    postComment: PropTypes.func.isRequired,
+    setMessage: PropTypes.func.isRequired
 })
 @connect(mapStateToProps, mapDispatchToProps)
 export class Comment extends Component {

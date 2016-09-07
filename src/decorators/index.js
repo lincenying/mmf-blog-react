@@ -1,12 +1,12 @@
 export function propTypes(param) {
-    return function(clazz) {
-        clazz.propTypes = Object.assign({}, clazz.propTypes || {}, param)
-        return clazz
+    return function(_class) {
+        _class.propTypes = Object.assign({}, _class.propTypes || {}, param)
+        return _class
     }
 }
 export function contextTypes(param) {
-    return function(clazz) {
-        clazz.contextTypes = Object.assign({}, clazz.contextTypes || {}, param)
-        return clazz
+    return function(_class) {
+        _class.contextTypes = Object.assign({}, _class.contextTypes || {}, param)
+        return _class
     }
 }

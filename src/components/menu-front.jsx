@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import Link from 'react-router/lib/Link'
-import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 
-@immutableRenderDecorator
 export class MenuFront extends Component {
     constructor(props) {
         super(props)
         this.handleSearch = this.handleSearch.bind(this)
+    }
+    shouldComponentUpdate() {
+        return true
     }
     handleSearch(e) {
         var qs = e.target.value

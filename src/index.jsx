@@ -1,14 +1,13 @@
 import './polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import thunk from 'redux-thunk'
 import browserHistory from 'react-router/lib/browserHistory'
 import IndexRoute from 'react-router/lib/IndexRoute'
 import Route from 'react-router/lib/Route'
 import Router from 'react-router/lib/Router'
 import {Provider} from 'react-redux'
 import {syncHistoryWithStore} from 'react-router-redux'
-import {configureCounterStore} from 'redux-store'
+import {configureCounterStore} from 'alias-store'
 import cookies from 'js-cookie'
 
 import {NotFound} from './views/404'
@@ -19,7 +18,7 @@ import {AdminArticleList} from './components/admin-list'
 import {AdminArticlePost} from './components/admin-post'
 import {AdminArticleEdit} from './components/admin-edit'
 
-const store = configureCounterStore({}, thunk)
+const store = configureCounterStore()
 const history = syncHistoryWithStore(browserHistory, store)
 const checkLogin = (nextState, replace, callback) => {
     var token = cookies.get('user')

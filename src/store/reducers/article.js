@@ -1,6 +1,4 @@
-import {
-    RECEIVE_POSTS, RECEIVE_ARTICLE, RECEIVE_COMMENT, POST_COMMENT
-} from '../actions/article'
+import {RECEIVE_POSTS, RECEIVE_ARTICLE, RECEIVE_COMMENT, POST_COMMENT} from 'alias-store-actions/article'
 import { createReducer } from 'redux-immutablejs'
 import { fromJS } from 'immutable'
 

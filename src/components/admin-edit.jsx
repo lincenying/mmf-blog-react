@@ -3,8 +3,8 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
-import * as adminActions from 'redux-store-actions/admin'
-import * as globalsActions from 'redux-store-actions/globals'
+import {fetchAdminArticle} from 'alias-store-actions/admin'
+import {setMessage} from 'alias-store-actions/globals'
 
 function mapStateToProps(state) {
     return {
@@ -12,14 +12,13 @@ function mapStateToProps(state) {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, adminActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
+    return bindActionCreators({fetchAdminArticle, setMessage}, dispatch)
 }
 
 @propTypes({
     article: PropTypes.object,
-    fetchAdminArticle: PropTypes.func,
-    setMessage: PropTypes.func
+    fetchAdminArticle: PropTypes.func.isRequired,
+    setMessage: PropTypes.func.isRequired
 })
 @connect(mapStateToProps, mapDispatchToProps)
 @immutableRenderDecorator

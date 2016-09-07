@@ -1,16 +1,16 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
-import * as globalsActions from 'redux-store-actions/globals'
+import {setMessage} from 'alias-store-actions/globals'
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(globalsActions, dispatch)
+    return bindActionCreators({setMessage}, dispatch)
 }
 
 @propTypes({
-    setMessage: React.PropTypes.func
+    setMessage: PropTypes.func.isRequired
 })
 @connect(null, mapDispatchToProps)
 @immutableRenderDecorator

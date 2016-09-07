@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import Link from 'react-router/lib/Link'
 import {propTypes} from '../decorators'
-import * as adminActions from 'redux-store-actions/admin'
-import * as globalsActions from 'redux-store-actions/globals'
+import {deleteArticle, recoverArticle, fetchAdminPosts} from 'alias-store-actions/admin'
 
 function mapStateToProps(state) {
     return {
@@ -13,13 +12,13 @@ function mapStateToProps(state) {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const _Action = Object.assign({}, adminActions, globalsActions)
-    return bindActionCreators(_Action, dispatch)
+    return bindActionCreators({deleteArticle, recoverArticle, fetchAdminPosts}, dispatch)
 }
 
 @propTypes({
-    deleteArticle: PropTypes.func,
-    fetchAdminArticle: PropTypes.func,
+    deleteArticle: PropTypes.func.isRequired,
+    recoverArticle: PropTypes.func.isRequired,
+    fetchAdminPosts: PropTypes.func.isRequired,
     posts: PropTypes.object
 })
 @connect(mapStateToProps, mapDispatchToProps)

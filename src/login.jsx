@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 
-import {configureCounterStore} from 'redux-store'
+import {configureCounterStore} from 'alias-store'
 import {Login} from './views/login'
 
 const store = configureCounterStore({}, thunk)

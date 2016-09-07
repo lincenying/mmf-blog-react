@@ -2,10 +2,25 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {ToastMessage, ToastContainer} from 'react-toastr'
-import * as articleActions from 'redux-store-actions/globals'
+import {setMessage} from 'alias-store-actions/globals'
+import {propTypes} from '../decorators'
 var ToastMessageFactory = React.createFactory(ToastMessage.animation)
 
-class toastr extends Component {
+function mapStateToProps(state) {
+    return {
+        message: state.globals.toJS().message
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({setMessage}, dispatch)
+}
+
+@propTypes({
+    message: PropTypes.object,
+    setMessage: PropTypes.func.isRequired
+})
+@connect(mapStateToProps, mapDispatchToProps)
+export class Toastr extends Component {
     componentDidUpdate(prevProps) {
         const { message, setMessage } = this.props
         const oldMessage = prevProps.message
@@ -27,20 +42,3 @@ class toastr extends Component {
         )
     }
 }
-
-toastr.propTypes = {
-    message: PropTypes.object,
-    setMessage: PropTypes.func
-}
-
-function mapStateToProps(state) {
-    return {
-        message: state.globals.toJS().message
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(articleActions, dispatch)
-}
-
-export const Toastr = connect(mapStateToProps, mapDispatchToProps)(toastr)
