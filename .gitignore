@@ -1,5 +1,6 @@
 .DS_Store
 .idea/
+.happypack/
 node_modules/
 build/
 dist/

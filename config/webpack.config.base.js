@@ -2,6 +2,7 @@ var path = require('path');
 var autoprefixer = require('autoprefixer')
 var browserslist = require('browserslist')
 var webpack = require('webpack')
+var HappyPack = require('happypack')
 
 var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relativePath = isInNodeModules ? '../../..' : '..';
@@ -50,19 +51,22 @@ var config = {
         preLoaders: [{
             test: /\.js|\.jsx$/,
             loader: 'eslint',
-            include: srcPath,
+            include: srcPath
         }],
         loaders: [{
             test: /\.js|\.jsx$/,
             include: srcPath,
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel',
+            happy: { id: 'jsx' }
         }, {
             test: /\.json$/,
-            loader: 'json'
+            loader: 'json',
+            happy: { id: 'json' }
         },{
             test: /\.(mp4|webm)$/,
-            loader: 'url?limit=10000'
+            loader: 'url?limit=10000',
+            happy: { id: 'url' }
         }]
     },
     eslint: {
@@ -80,7 +84,10 @@ var config = {
         new webpack.DllReferencePlugin({
             context: path.resolve(__dirname, "../src"),
             manifest: require("../static/vendor-manifest.json")
-        })
+        }),
+        new HappyPack({ id: 'jsx', threads: 4 }),
+        new HappyPack({ id: 'json', threads: 4 }),
+        new HappyPack({ id: 'url', threads: 4 })
     ]
 };
 
