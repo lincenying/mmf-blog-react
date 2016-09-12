@@ -10,3 +10,6 @@ selenium-debug.log
 test/unit/coverage
 test/e2e/reports
 proxy.js
+index.html
+login.html
+vendor-manifest.json
