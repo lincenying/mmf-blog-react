@@ -15,13 +15,13 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({fetchAdminArticle, setMessage}, dispatch)
 }
 
+@connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 @propTypes({
     article: PropTypes.object,
     fetchAdminArticle: PropTypes.func.isRequired,
     setMessage: PropTypes.func.isRequired
 })
-@connect(mapStateToProps, mapDispatchToProps)
-@immutableRenderDecorator
 export class AdminArticleEdit extends Component {
     constructor(props) {
         super(props)

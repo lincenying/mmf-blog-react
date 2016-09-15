@@ -9,11 +9,11 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({setMessage}, dispatch)
 }
 
+@connect(null, mapDispatchToProps)
+@immutableRenderDecorator
 @propTypes({
     setMessage: PropTypes.func.isRequired
 })
-@connect(null, mapDispatchToProps)
-@immutableRenderDecorator
 export class AdminArticlePost extends Component {
     constructor(props) {
         super(props)

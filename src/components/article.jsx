@@ -17,12 +17,12 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({fetchArticle}, dispatch)
 }
 
+@connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 @propTypes({
     article: PropTypes.object,
     fetchArticle: PropTypes.func.isRequired
 })
-@connect(mapStateToProps, mapDispatchToProps)
-@immutableRenderDecorator
 export class Article extends Component {
     componentWillMount() {
         const {pathname} = this.props.article

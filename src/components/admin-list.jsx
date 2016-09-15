@@ -15,14 +15,14 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({deleteArticle, recoverArticle, fetchAdminPosts}, dispatch)
 }
 
+@connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 @propTypes({
     deleteArticle: PropTypes.func.isRequired,
     recoverArticle: PropTypes.func.isRequired,
     fetchAdminPosts: PropTypes.func.isRequired,
     posts: PropTypes.object
 })
-@connect(mapStateToProps, mapDispatchToProps)
-@immutableRenderDecorator
 export class AdminArticleList extends Component {
     constructor(props) {
         super(props)

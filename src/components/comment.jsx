@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {propTypes} from '../decorators'
 import {fetchComment, postComment} from 'alias-store-actions/article'
-import {setMessage} from 'alias-store-actions/admin'
+import {setMessage} from 'alias-store-actions/globals'
 import {CommentItem} from "./comment-item"
 import api from '../api'
 
@@ -14,13 +14,13 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({fetchComment, postComment, setMessage}, dispatch)
 }
 
+@connect(mapStateToProps, mapDispatchToProps)
 @propTypes({
     comment: PropTypes.object,
     fetchComment: PropTypes.func.isRequired,
     postComment: PropTypes.func.isRequired,
     setMessage: PropTypes.func.isRequired
 })
-@connect(mapStateToProps, mapDispatchToProps)
 export class Comment extends Component {
     constructor(props) {
         super(props)

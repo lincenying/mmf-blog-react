@@ -15,11 +15,11 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({setMessage}, dispatch)
 }
 
+@connect(mapStateToProps, mapDispatchToProps)
 @propTypes({
     message: PropTypes.object,
     setMessage: PropTypes.func.isRequired
 })
-@connect(mapStateToProps, mapDispatchToProps)
 export class Toastr extends Component {
     componentDidUpdate(prevProps) {
         const { message, setMessage } = this.props

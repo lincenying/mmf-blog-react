@@ -16,12 +16,12 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({fetchPosts}, dispatch)
 }
 
+@connect(mapStateToProps, mapDispatchToProps)
+@immutableRenderDecorator
 @propTypes({
     fetchPosts: PropTypes.func.isRequired,
     posts: PropTypes.object
 })
-@connect(mapStateToProps, mapDispatchToProps)
-@immutableRenderDecorator
 export class Main extends Component {
     constructor(props) {
         super(props)
