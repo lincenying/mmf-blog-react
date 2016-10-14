@@ -16,13 +16,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-@immutableRenderDecorator
 @propTypes({
     deleteArticle: PropTypes.func.isRequired,
     recoverArticle: PropTypes.func.isRequired,
     fetchAdminPosts: PropTypes.func.isRequired,
     posts: PropTypes.object
 })
+@immutableRenderDecorator
 export class AdminArticleList extends Component {
     constructor(props) {
         super(props)
@@ -69,8 +69,7 @@ export class AdminArticleList extends Component {
                     <Link to={`/article/${item._id}`} target="_blank" rel='noopener noreferrer'>{item.title}</Link>
                     {
                     item.is_delete === "0" ?
-                        <a onClick={this.handleDeleteArticle.bind(this, item._id)} href="javascript:;" className="badge badge-danger">删除</a> :
-                        <a onClick={this.handleRecoverArticle.bind(this, item._id)} href="javascript:;" className="badge badge-info">恢复</a>
+                        <a onClick={this.handleDeleteArticle.bind(this, item._id)} href="javascript:;" className="badge badge-danger">删除</a> : <a onClick={this.handleRecoverArticle.bind(this, item._id)} href="javascript:;" className="badge badge-info">恢复</a>
                     }
                     <Link to={`/admin/edit/${item._id}/${posts.page}`} className="badge badge-success">编辑</Link>
                 </li>

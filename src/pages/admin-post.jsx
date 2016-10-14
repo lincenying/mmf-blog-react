@@ -10,10 +10,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(null, mapDispatchToProps)
-@immutableRenderDecorator
 @propTypes({
     setMessage: PropTypes.func.isRequired
 })
+@immutableRenderDecorator
 export class AdminArticlePost extends Component {
     constructor(props) {
         super(props)

@@ -3,7 +3,7 @@
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var proxyConfig = require('../proxy')
+var proxyConfig = require('../config/proxy')
 
 var config = {
     build: {

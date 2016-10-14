@@ -21,8 +21,7 @@ export class MainItem extends Component {
     render() {
         const item = this.props.list
         const btn = this.state.showMore ?
-            <a onClick={this.handleOpen} className="less" href="javascript:;">收起 ↑</a> :
-            <a onClick={this.handleOpen} className="more" href="javascript:;">展开 ↓</a>
+            <a onClick={this.handleOpen} className="less" href="javascript:;">收起 ↑</a> : <a onClick={this.handleOpen} className="more" href="javascript:;">展开 ↓</a>
         return (
             <div className="index m-post box article">
                 <a href="javascript:;" className="w-icon w-icon-1">&nbsp;</a>

@@ -1,4 +1,3 @@
-import './polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import browserHistory from 'react-router/lib/browserHistory'
@@ -10,13 +9,13 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import {configureCounterStore} from 'alias-store'
 import cookies from 'js-cookie'
 
-import {NotFound} from './views/404'
-import {App} from './views/app'
-import {Main} from './components/main'
-import {Article} from './components/article'
-import {AdminArticleList} from './components/admin-list'
-import {AdminArticlePost} from './components/admin-post'
-import {AdminArticleEdit} from './components/admin-edit'
+import {NotFound} from './views/404.jsx'
+import {App} from './views/app.jsx'
+import {Main} from './pages/main.jsx'
+import {Article} from './pages/article.jsx'
+import {AdminArticleList} from './pages/admin-list.jsx'
+import {AdminArticlePost} from './pages/admin-post.jsx'
+import {AdminArticleEdit} from './pages/admin-edit.jsx'
 
 const store = configureCounterStore()
 const history = syncHistoryWithStore(browserHistory, store)

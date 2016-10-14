@@ -1,20 +1,17 @@
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HappyPack = require('happypack')
 
 var baseWebpackConfig = require('./webpack.config.base')
 var config = merge(baseWebpackConfig, {
     devtool: 'eval',
     module: {
-        loaders: [{
+        rules: [{
             test: /\.css$/,
-            loader: 'style!css?-autoprefixer!postcss',
-            happy: { id: 'css' }
+            loader: 'style!css?-autoprefixer!postcss'
         }, {
             test: /\.less/,
-            loader: 'style!css?-autoprefixer!postcss!less',
-            happy: { id: 'less' }
+            loader: 'style!css?-autoprefixer!postcss!less'
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
             loader: 'file'
@@ -25,18 +22,16 @@ var config = merge(baseWebpackConfig, {
             'process.env.NODE_ENV': '"development"'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new HappyPack({ id: 'css', threads: 4 }),
-        new HappyPack({ id: 'less', threads: 4 }),
         new HtmlWebpackPlugin({
             chunks: ['app'],
             filename: 'index.html',
-            template: 'index.html',
+            template: 'src/template/index.html',
             inject: true
         }),
         new HtmlWebpackPlugin({
             chunks: ['login'],
             filename: 'login.html',
-            template: 'login.html',
+            template: 'src/template/login.html',
             inject: true
         })
     ]

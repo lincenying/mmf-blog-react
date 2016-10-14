@@ -17,7 +17,7 @@ var config = merge(baseWebpackConfig, {
         publicPath: '/'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.css$/,
             include: srcPath,
             loader: ExtractTextPlugin.extract(['css?-autoprefixer', 'postcss'])
@@ -57,7 +57,7 @@ var config = merge(baseWebpackConfig, {
             inject: true,
             chunks: ['commons', 'app'],
             filename: 'index.html',
-            template: 'index.html',
+            template: 'src/template/index.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -68,7 +68,7 @@ var config = merge(baseWebpackConfig, {
             inject: true,
             chunks: ['commons', 'login'],
             filename: 'login.html',
-            template: 'login.html',
+            template: 'src/template/login.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

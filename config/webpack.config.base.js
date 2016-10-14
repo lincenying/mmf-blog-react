@@ -2,7 +2,6 @@ var path = require('path');
 var autoprefixer = require('autoprefixer')
 var browserslist = require('browserslist')
 var webpack = require('webpack')
-var HappyPack = require('happypack')
 
 var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relativePath = isInNodeModules ? '../../..' : '..';
@@ -41,40 +40,30 @@ var config = {
             "alias-store-reducers": path.join(__dirname, "../src/store/reducers"),
             "alias-api": path.join(__dirname, "../src/api")
         },
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     resolveLoader: {
-        root: nodeModulesPath,
-        moduleTemplates: ['*-loader']
+        modules: [nodeModulesPath]
     },
     module: {
-        preLoaders: [{
+        rules: [{
             test: /\.js|\.jsx$/,
             loader: 'eslint',
+            enforce: "pre",
             include: srcPath
-        }],
-        loaders: [{
+        }, {
             test: /\.js|\.jsx$/,
             include: srcPath,
             exclude: /node_modules/,
-            loader: 'babel',
-            happy: { id: 'jsx' }
+            loader: 'babel'
         }, {
             test: /\.json$/,
-            loader: 'json',
-            happy: { id: 'json' }
+            loader: 'json'
         },{
             test: /\.(mp4|webm)$/,
-            loader: 'url?limit=10000',
-            happy: { id: 'url' }
+            loader: 'url?limit=10000'
         }]
     },
-    eslint: {
-        useEslintrc: true
-    },
-    postcss: [
-        autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')})
-    ],
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -85,9 +74,15 @@ var config = {
             context: path.resolve(__dirname, "../src"),
             manifest: require("../static/vendor-manifest.json")
         }),
-        new HappyPack({ id: 'jsx', threads: 4 }),
-        new HappyPack({ id: 'json', threads: 4 }),
-        new HappyPack({ id: 'url', threads: 4 })
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                context: __dirname,
+                postcss: [ autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')}) ],
+                eslint: {
+                    useEslintrc: true
+                }
+            }
+        })
     ]
 };
 
