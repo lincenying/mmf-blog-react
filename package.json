@@ -22,7 +22,8 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "redux-form": "^6.1.0",
     "redux-immutablejs": "^0.0.8",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "store2": "^2.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.1",

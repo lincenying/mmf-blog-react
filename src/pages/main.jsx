@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
+import ls from 'store2'
 import {propTypes} from '../decorators'
 import {fetchPosts} from 'alias-store-actions'
 import {MainItem} from "../components/main-item.jsx"
@@ -30,6 +31,11 @@ export class Main extends Component {
     componentWillMount() {
         const {pathname} = this.props.posts
         if (pathname !== this.props.location.pathname) this.handlefetchPosts()
+    }
+    componentDidMount() {
+        const path = this.props.location.pathname
+        const scrollTop = ls.get(path) || 0
+        window.scrollTo(0, scrollTop)
     }
     componentDidUpdate(prevProps) {
         const pathname = this.props.location.pathname
