@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {ToastMessage, ToastContainer} from 'react-toastr'
-import {setMessage} from 'alias-store-actions/globals'
+import {setMessage} from 'alias-store-actions'
 import {propTypes} from '../decorators'
 var ToastMessageFactory = React.createFactory(ToastMessage.animation)
 

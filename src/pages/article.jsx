@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import Link from 'react-router/lib/Link'
 import {propTypes} from '../decorators'
-import {fetchArticle} from 'alias-store-actions/article'
+import {fetchArticle} from 'alias-store-actions'
 import {Comment} from '../components/comment.jsx'
 import {Footer} from '../components/footer.jsx'
 

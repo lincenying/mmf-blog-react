@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {propTypes} from '../decorators'
-import {fetchComment, postComment} from 'alias-store-actions/article'
-import {setMessage} from 'alias-store-actions/globals'
+import {fetchComment, postComment, setMessage} from 'alias-store-actions'
 import {CommentItem} from "./comment-item.jsx"
 import api from '../api'
 

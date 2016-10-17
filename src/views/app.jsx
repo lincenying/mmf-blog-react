@@ -21,9 +21,9 @@ export const App = props => {
                 {menu}
             </div>
             <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-                { React.cloneElement(props.children, {
+                {React.cloneElement(props.children, {
                     key: props.location.pathname
-                }) }
+                })}
             </ReactCSSTransitionGroup>
             <Arrow />
             <DevTools />

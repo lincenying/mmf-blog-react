@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
-import {setMessage} from 'alias-store-actions/globals'
+import {setMessage} from 'alias-store-actions'
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({setMessage}, dispatch)

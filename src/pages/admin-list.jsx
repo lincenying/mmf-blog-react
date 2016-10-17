@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import Link from 'react-router/lib/Link'
 import {propTypes} from '../decorators'
-import {deleteArticle, recoverArticle, fetchAdminPosts} from 'alias-store-actions/admin'
+import {deleteArticle, recoverArticle, fetchAdminPosts} from 'alias-store-actions'
 
 function mapStateToProps(state) {
     return {
@@ -68,8 +68,8 @@ export class AdminArticleList extends Component {
                 <li key={item._id} className="list-group-item">
                     <Link to={`/article/${item._id}`} target="_blank" rel='noopener noreferrer'>{item.title}</Link>
                     {
-                    item.is_delete === "0" ?
-                        <a onClick={this.handleDeleteArticle.bind(this, item._id)} href="javascript:;" className="badge badge-danger">删除</a> : <a onClick={this.handleRecoverArticle.bind(this, item._id)} href="javascript:;" className="badge badge-info">恢复</a>
+                        item.is_delete === "0" ?
+                            <a onClick={this.handleDeleteArticle.bind(this, item._id)} href="javascript:;" className="badge badge-danger">删除</a> : <a onClick={this.handleRecoverArticle.bind(this, item._id)} href="javascript:;" className="badge badge-info">恢复</a>
                     }
                     <Link to={`/admin/edit/${item._id}/${posts.page}`} className="badge badge-success">编辑</Link>
                 </li>

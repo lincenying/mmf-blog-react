@@ -3,8 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
-import {fetchAdminArticle} from 'alias-store-actions/admin'
-import {setMessage} from 'alias-store-actions/globals'
+import {fetchAdminArticle, setMessage} from 'alias-store-actions'
 
 function mapStateToProps(state) {
     return {
