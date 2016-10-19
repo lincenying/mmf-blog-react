@@ -20,11 +20,11 @@ var config = merge(baseWebpackConfig, {
         rules: [{
             test: /\.css$/,
             include: srcPath,
-            loader: ExtractTextPlugin.extract(['css?-autoprefixer', 'postcss'])
+            loader: ExtractTextPlugin.extract(['css', 'postcss'])
         },  {
             test: /\.less/,
             include: srcPath,
-            loader: ExtractTextPlugin.extract(['css?-autoprefixer', 'postcss', 'less'])
+            loader: ExtractTextPlugin.extract(['css', 'postcss', 'less'])
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
             loader: 'file',
