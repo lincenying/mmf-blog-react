@@ -22,14 +22,17 @@ var config = merge(baseWebpackConfig, {
             'process.env.NODE_ENV': '"development"'
         }),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ["vendor"]
+        }),
         new HtmlWebpackPlugin({
-            chunks: ['app'],
+            chunks: ['vendor', 'app'],
             filename: 'index.html',
             template: 'src/template/index.html',
             inject: true
         }),
         new HtmlWebpackPlugin({
-            chunks: ['login'],
+            chunks: ['vendor', 'login'],
             filename: 'login.html',
             template: 'src/template/login.html',
             inject: true

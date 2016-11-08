@@ -40,9 +40,12 @@ var config = merge(baseWebpackConfig, {
         }),
         new ExtractTextPlugin('static/css/[name].[contenthash].css'),
         new webpack.optimize.CommonsChunkPlugin({
-            name: "commons",
-            chunks: ["app", "login"]
+            name: 'vendor',
+            minChunks: function(module, count) {
+                return (module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0)
+            }
         }),
+        new webpack.optimize.CommonsChunkPlugin({name: 'manifest', chunks: ['vendor']}),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
@@ -55,7 +58,7 @@ var config = merge(baseWebpackConfig, {
         }),
         new HtmlWebpackPlugin({
             inject: true,
-            chunks: ['commons', 'app'],
+            chunks: ['manifest', 'vendor', 'app'],
             filename: 'index.html',
             template: 'src/template/index.html',
             minify: {
@@ -66,7 +69,7 @@ var config = merge(baseWebpackConfig, {
         }),
         new HtmlWebpackPlugin({
             inject: true,
-            chunks: ['commons', 'login'],
+            chunks: ['manifest', 'vendor', 'login'],
             filename: 'login.html',
             template: 'src/template/login.html',
             minify: {

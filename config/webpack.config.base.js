@@ -77,7 +77,6 @@ var config = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 context: __dirname,
-                postcss: [ autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')}) ],
                 eslint: {
                     useEslintrc: true
                 }
