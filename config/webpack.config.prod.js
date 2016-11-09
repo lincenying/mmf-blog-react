@@ -46,8 +46,6 @@ var config = merge(baseWebpackConfig, {
             }
         }),
         new webpack.optimize.CommonsChunkPlugin({name: 'manifest', chunks: ['vendor']}),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false
