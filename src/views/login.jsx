@@ -10,10 +10,10 @@ import {renderInput} from '../components/_renderField.jsx'
 import {setMessage} from 'alias-store-actions/globals'
 import api from '../api'
 
-import '../html/css/login.css'
-import '../html/css/nprogress.css'
-import '../html/css/animate.min.css'
-import '../html/css/toastr.min.css'
+import '../assets/css/login.css'
+import 'nprogress/nprogress.css'
+import 'animate.css/animate.min.css'
+import 'toastr/build/toastr.min.css'
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({setMessage}, dispatch)

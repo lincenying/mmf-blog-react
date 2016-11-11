@@ -6,10 +6,11 @@ import {MenuAdmin} from '../components/menu-admin.jsx'
 import {Arrow} from '../components/arrow.jsx'
 import {DevTools} from '../components/devtools.jsx'
 import {Toastr} from '../components/_toastr.jsx'
-import '../html/css/style.css'
-import '../html/css/nprogress.css'
-import '../html/css/animate.min.css'
-import '../html/css/toastr.min.css'
+
+import '../assets/css/style.css'
+import 'nprogress/nprogress.css'
+import 'animate.css/animate.min.css'
+import 'toastr/build/toastr.min.css'
 
 export const App = props => {
     const {route: {needLogin}} = props
