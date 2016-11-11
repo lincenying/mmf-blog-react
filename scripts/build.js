@@ -9,9 +9,10 @@ var config = require('../config/webpack.config.prod');
 
 var isInNodeModules = 'node_modules' === path.basename(path.resolve(path.join(__dirname, '..', '..')));
 var relative = isInNodeModules ? '../..' : '.';
-rm('-rf', relative + '/dist')
+rm('-rf', relative + '/dist/static')
 mkdir('-p', relative + '/dist/static')
 cp('-R', 'static/', relative + '/dist/')
+cp('-R', 'static/favicon.ico', relative + '/dist/')
 
 webpack(config).run(function(err, stats) {
     if (err) {

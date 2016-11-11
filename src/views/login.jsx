@@ -59,7 +59,7 @@ export class Login extends Component {
             if (json.code === 200) {
                 setMessage('登录成功!')
                 setTimeout( () => {
-                    window.location.href = '/'
+                    window.location.href = '/admin/list/1'
                 }, 500)
             } else {
                 setMessage({
