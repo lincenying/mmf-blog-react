@@ -52,6 +52,7 @@ export class AdminArticlePost extends Component {
     }
     handleSubmit(event) {
         event.preventDefault()
+        const target = event.target
         const {setMessage} = this.props
         const {title, category} = this.state
         // eslint-disable-next-line
@@ -63,7 +64,7 @@ export class AdminArticlePost extends Component {
             })
             return false
         }
-        var data = new FormData(event.target)
+        var data = new FormData(target)
         $.ajax({
             contentType: false,
             processData: false,
@@ -71,7 +72,14 @@ export class AdminArticlePost extends Component {
         }).then(json => {
             if (json.code === 200) {
                 setMessage('发布成功!')
-                event.target.reset()
+                // eslint-disable-next-line
+                articleEditor.clear()
+                target.reset()
+                this.setState({
+                    title: '',
+                    category: '',
+                    content: ''
+                })
             } else {
                 setMessage({
                     type: 'error',
