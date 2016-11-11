@@ -1,7 +1,8 @@
 import NProgress from 'nprogress'
+import config from '../config'
 
 $.ajaxSetup({
-    url: '/api/',
+    url: config.api,
     global: true,
     type: 'POST',
     dataType: 'json',

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import {propTypes} from '../decorators'
 import {fetchAdminArticle, setMessage} from 'alias-store-actions'
+import config from '../config'
 
 function mapStateToProps(state) {
     return {
@@ -67,7 +68,7 @@ export class AdminArticleEdit extends Component {
                 saveHTMLToTextarea : true,
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/api/?action=upload"
+                imageUploadURL : config.api + "?action=upload"
             })
         }
     }
@@ -113,7 +114,7 @@ export class AdminArticleEdit extends Component {
         return (
             <div className="g-mn">
                 <div className="box">
-                    <form onSubmit={this.handleSubmit} id="article-edit" action="/api/" method="post">
+                    <form onSubmit={this.handleSubmit} id="article-edit" action={config.api} method="post">
                         <section id="edit-title">
                             <input value={this.state.title} onChange={this.handleChange} id="title" type="text" name="title" className="form-control" placeholder="请输入标题" />
                         </section>
