@@ -12,18 +12,16 @@ var config = merge(baseWebpackConfig, {
     devtool: false,
     output: {
         path: buildPath,
-        filename: 'static/js/[name].[chunkhash].js',
-        chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
+        filename: 'static/js/[name].[chunkhash:7].js',
+        chunkFilename: 'static/js/[name].[chunkhash:7].chunk.js',
         publicPath: '/'
     },
     module: {
         rules: [{
             test: /\.css$/,
-            include: srcPath,
             loader: ExtractTextPlugin.extract(['css', 'postcss'])
         },  {
             test: /\.less/,
-            include: srcPath,
             loader: ExtractTextPlugin.extract(['css', 'postcss', 'less'])
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
@@ -38,7 +36,7 @@ var config = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
         }),
-        new ExtractTextPlugin('static/css/[name].[contenthash].css'),
+        new ExtractTextPlugin('static/css/[name].[contenthash:7].css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function(module, count) {
