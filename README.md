@@ -1,6 +1,6 @@
 # mmf-blog react版
 
-demo: [http://www.mmxiaowu.com](http://www.mmxiaowu.com)
+demo: [http://react.mmxiaowu.com](http://react.mmxiaowu.com)
 
 react: [https://github.com/lincenying/mmf-blog-react](https://github.com/lincenying/mmf-blog-react)
 
