@@ -89,8 +89,9 @@ export class AdminArticlePost extends Component {
         })
     }
     handleChange(e) {
-        const id = e.target.id,
-            value = e.target.value
+        const target = e.target
+        const id = target.id,
+            value = target.value
         const state = this.state
         state[id] = value
         this.setState(state)
@@ -101,7 +102,7 @@ export class AdminArticlePost extends Component {
                 <div className="box">
                     <form onSubmit={this.handleSubmit} id="article-post" action={config.api} method="post">
                         <section id="post-title">
-                            <input value={this.state.title} onChange={this.handleChange} id="title" type="text" className="form-control" placeholder="请输入标题" />
+                            <input value={this.state.title} onChange={this.handleChange} id="title" name="title" type="text" className="form-control" placeholder="请输入标题" />
                         </section>
                         <section id="post-category">
                             <select value={this.state.category} onChange={this.handleChange} id="category" name="category" className="form-control">

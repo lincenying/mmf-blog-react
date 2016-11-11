@@ -44,9 +44,9 @@ export class AdminArticleEdit extends Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.article.data._id && this.props.article.data._id) {
             this.setState({
-                title: this.props.article.data.title,
-                category: this.props.article.data.category,
-                content: this.props.article.data.content
+                title: this.props.article.data.title || '',
+                category: this.props.article.data.category || '',
+                content: this.props.article.data.content || ''
             })
             // eslint-disable-next-line
             window.editEditor = editormd("edit-content", {
@@ -74,7 +74,7 @@ export class AdminArticleEdit extends Component {
     }
     handleSubmit(event) {
         event.preventDefault()
-        const {setMessage, history, params: {page}} = this.props
+        const {setMessage, router, params: {page}} = this.props
         const {title, category} = this.state
         // eslint-disable-next-line
         const content = editEditor.getMarkdown()
@@ -93,7 +93,7 @@ export class AdminArticleEdit extends Component {
         }).then(json => {
             if (json.code === 200) {
                 setMessage('编辑成功!')
-                history.push('/admin/list/' + page)
+                router.push('/admin/list/' + page)
             } else {
                 setMessage({
                     type: 'error',
@@ -103,8 +103,9 @@ export class AdminArticleEdit extends Component {
         })
     }
     handleChange(e) {
-        const id = e.target.name,
-            value = e.target.value
+        const target = e.target
+        const id = target.name,
+            value = target.value
         const state = this.state
         state[id] = value
         this.setState(state)

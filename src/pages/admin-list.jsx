@@ -30,8 +30,7 @@ export class AdminArticleList extends Component {
         this.handleRecoverArticle = this.handleRecoverArticle.bind(this)
     }
     componentWillMount() {
-        const {pathname} = this.props.posts
-        if (pathname !== this.props.location.pathname) this.handlefetchAdminArticlePosts()
+        this.handlefetchAdminArticlePosts()
     }
     componentDidUpdate(prevProps) {
         const pathname = this.props.location.pathname
