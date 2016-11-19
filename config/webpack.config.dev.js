@@ -8,13 +8,13 @@ var config = merge(baseWebpackConfig, {
     module: {
         rules: [{
             test: /\.css$/,
-            loader: 'style!css!postcss'
+            loader: 'style-loader!css-loader!postcss-loader'
         }, {
             test: /\.less/,
-            loader: 'style!css!postcss!less'
+            loader: 'style-loader!css-loader!postcss-loader!less-loader'
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-            loader: 'file'
+            loader: 'file-loader'
         }]
     },
     plugins: [

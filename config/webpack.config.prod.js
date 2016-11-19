@@ -19,13 +19,13 @@ var config = merge(baseWebpackConfig, {
     module: {
         rules: [{
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract(['css', 'postcss'])
+            loader: ExtractTextPlugin.extract(['css-loader', 'postcss-loader'])
         },  {
             test: /\.less/,
-            loader: ExtractTextPlugin.extract(['css', 'postcss', 'less'])
+            loader: ExtractTextPlugin.extract(['css-loader', 'postcss-loader', 'less-loader'])
         }, {
             test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-            loader: 'file',
+            loader: 'file-loader',
             query: {
                 limit: 10000,
                 name: 'static/img/[name].[hash:7].[ext]'
