@@ -40,7 +40,6 @@ export class AdminArticleList extends Component {
     handlefetchAdminArticlePosts() {
         const {fetchAdminPosts, params: {page}, location: {pathname}} = this.props
         fetchAdminPosts({
-            action: 'getAdminArticle',
             page,
             pathname,
             limit: 20
@@ -49,14 +48,12 @@ export class AdminArticleList extends Component {
     handleDeleteArticle(id) {
         const {deleteArticle} = this.props
         deleteArticle({
-            action: 'delete',
             id
         })
     }
     handleRecoverArticle(id) {
         const {recoverArticle} = this.props
         recoverArticle({
-            action: 'recover',
             id
         })
     }
@@ -67,7 +64,7 @@ export class AdminArticleList extends Component {
                 <li key={item._id} className="list-group-item">
                     <Link to={`/article/${item._id}`} target="_blank" rel='noopener noreferrer'>{item.title}</Link>
                     {
-                        item.is_delete === "0" ?
+                        item.is_delete === "0" || item.is_delete === 0 ?
                             <a onClick={this.handleDeleteArticle.bind(this, item._id)} href="javascript:;" className="badge badge-danger">删除</a> : <a onClick={this.handleRecoverArticle.bind(this, item._id)} href="javascript:;" className="badge badge-info">恢复</a>
                     }
                     <Link to={`/admin/edit/${item._id}/${posts.page}`} className="badge badge-success">编辑</Link>

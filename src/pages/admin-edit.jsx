@@ -36,7 +36,6 @@ export class AdminArticleEdit extends Component {
     componentWillMount() {
         const {fetchAdminArticle, params: {id}, location: {pathname}} = this.props
         fetchAdminArticle({
-            action: 'getArticle',
             id,
             pathname
         })
@@ -87,6 +86,8 @@ export class AdminArticleEdit extends Component {
         }
         var data = new FormData(event.target)
         $.ajax({
+            url: config.api + 'admin/article/post',
+            type: 'post',
             contentType: false,
             processData: false,
             data
@@ -115,7 +116,7 @@ export class AdminArticleEdit extends Component {
         return (
             <div className="g-mn">
                 <div className="box">
-                    <form onSubmit={this.handleSubmit} id="article-edit" action={config.api} method="post">
+                    <form onSubmit={this.handleSubmit} id="article-edit" action={config.api + 'admin/article/modify'} method="post">
                         <section id="edit-title">
                             <input value={this.state.title} onChange={this.handleChange} id="title" type="text" name="title" className="form-control" placeholder="请输入标题" />
                         </section>

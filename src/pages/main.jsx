@@ -45,7 +45,6 @@ export class Main extends Component {
     handlefetchPosts(page = 1) {
         const {fetchPosts, params: {id, qs}, location: {pathname}} = this.props
         fetchPosts({
-            action: 'getArticleList',
             id,
             qs,
             pathname,

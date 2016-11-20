@@ -66,6 +66,8 @@ export class AdminArticlePost extends Component {
         }
         var data = new FormData(target)
         $.ajax({
+            url: config.api + 'admin/article/post',
+            type: 'post',
             contentType: false,
             processData: false,
             data
@@ -100,7 +102,7 @@ export class AdminArticlePost extends Component {
         return (
             <div className="g-mn">
                 <div className="box">
-                    <form onSubmit={this.handleSubmit} id="article-post" action={config.api} method="post">
+                    <form onSubmit={this.handleSubmit} id="article-post" action={config.api + 'admin/article/post'} method="post">
                         <section id="post-title">
                             <input value={this.state.title} onChange={this.handleChange} id="title" name="title" type="text" className="form-control" placeholder="请输入标题" />
                         </section>

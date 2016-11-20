@@ -49,7 +49,7 @@ export class Comment extends Component {
     }
     handleFetchComment(page = 1) {
         const {fetchComment, id, pathname} = this.props
-        fetchComment({action: 'comment', id, page, pathname})
+        fetchComment({id, page, pathname})
     }
     handleLoadMore() {
         const {page} = this.props.comment
@@ -62,8 +62,7 @@ export class Comment extends Component {
             setMessage({type: 'error', content: '请输入评论内容!'})
             return false
         }
-        const json = await api.getData({
-            action: 'postComment',
+        const json = await api.post('frontend/comment/post', {
             id,
             content,
             username: username || '匿名用户'

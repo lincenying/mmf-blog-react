@@ -36,7 +36,6 @@ export class Article extends Component {
     handlefetchArticle() {
         const {fetchArticle, params: {id}, location: {pathname}} = this.props
         fetchArticle({
-            action: 'article',
             id,
             pathname,
             markdown: 1

@@ -52,10 +52,9 @@ export class Login extends Component {
     }
     handleSubmit(values) {
         const {setMessage} = this.props
-        api.getData({
-            action: 'login',
+        api.post('frontend/login', {
             ...values
-        }).then(json => {
+        }, false).then(json => {
             if (json.code === 200) {
                 setMessage('登录成功!')
                 setTimeout( () => {

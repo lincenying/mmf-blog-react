@@ -14,7 +14,7 @@ function receivePosts(config) {
 
 export function fetchPosts(config) {
     return dispatch => {
-        return api.getFromConfig(config).then(json => dispatch(receivePosts({posts: json.data, ...config})))
+        return api.get('frontend/topics', config).then(json => dispatch(receivePosts({posts: json.data, ...config})))
     }
 }
 
@@ -27,7 +27,7 @@ function receiveArticle(config) {
 
 export function fetchArticle(config) {
     return dispatch => {
-        return api.getFromConfig(config).then(json => dispatch(receiveArticle({json, ...config})))
+        return api.get('frontend/article', config).then(json => dispatch(receiveArticle({json, ...config})))
     }
 }
 
@@ -40,7 +40,7 @@ function receiveComment(config) {
 
 export function fetchComment(config) {
     return dispatch => {
-        return api.getFromConfig(config).then(json => dispatch(receiveComment({
+        return api.get('frontend/comment/list', config).then(json => dispatch(receiveComment({
             json,
             ...config
         })))
