@@ -1,4 +1,5 @@
 import api from 'alias-api'
+import { errConfig } from './globals'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
@@ -14,7 +15,10 @@ function receivePosts(config) {
 
 export function fetchPosts(config) {
     return dispatch => {
-        return api.get('frontend/topics', config).then(json => dispatch(receivePosts({posts: json.data, ...config})))
+        return api.get('frontend/topics', config).then(
+            json => dispatch(receivePosts({posts: json.data, ...config})),
+            () => dispatch(errConfig)
+        )
     }
 }
 
@@ -27,7 +31,7 @@ function receiveArticle(config) {
 
 export function fetchArticle(config) {
     return dispatch => {
-        return api.get('frontend/article', config).then(json => dispatch(receiveArticle({json, ...config})))
+        return api.get('frontend/article', config).then(json => dispatch(receiveArticle({json, ...config})), () => dispatch(errConfig))
     }
 }
 
@@ -43,7 +47,7 @@ export function fetchComment(config) {
         return api.get('frontend/comment/list', config).then(json => dispatch(receiveComment({
             json,
             ...config
-        })))
+        })), () => dispatch(errConfig))
     }
 }
 

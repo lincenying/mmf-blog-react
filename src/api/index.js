@@ -27,7 +27,8 @@ export default {
                 data,
                 global
             }).then(data => {
-                resolve(data)
+                if (data.code === 200) resolve(data)
+                else reject(data.message)
             }, error => {
                 reject(error.responseText || error.statusText)
             })
@@ -41,7 +42,8 @@ export default {
                 data,
                 global
             }).then(data => {
-                resolve(data)
+                if (data.code === 200) resolve(data)
+                else reject(data.message)
             }, error => {
                 reject(error.responseText || error.statusText)
             })
