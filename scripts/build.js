@@ -12,7 +12,7 @@ var relative = isInNodeModules ? '../..' : '.';
 rm('-rf', relative + '/dist/static')
 mkdir('-p', relative + '/dist/static')
 cp('-R', 'static/', relative + '/dist/')
-cp('-R', 'static/favicon.ico', relative + '/dist/')
+cp('-R', 'favicon.ico', relative + '/dist/')
 
 webpack(config).run(function(err, stats) {
     if (err) {
