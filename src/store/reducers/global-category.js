@@ -1,30 +1,13 @@
-import {RECEIVE_POSTS, RECEIVE_ARTICLE, RECEIVE_COMMENT, POST_COMMENT} from 'alias-store-actions/article'
 import { createReducer } from 'redux-immutablejs'
 import { fromJS } from 'immutable'
 
 const initStates = fromJS({
-    posts: {
-        list: [],
-        hasNext: 0,
-        page: 1,
-        pathname: ''
-    },
-    article: {
-        data: {},
-        next: {},
-        prev: {},
-        pathname: ''
-    },
-    comment: {
-        list: [],
-        hasNext: 0,
-        page: 1,
-        pathname: ''
-    }
+    lists: [],
+    item: {}
 })
 
 export const article = createReducer(initStates, {
-    [RECEIVE_POSTS]: (state, action) => {
+    ['receiveCategoryList']: (state, action) => {
         const {posts: { list, hasNext }, page, pathname} = action
         const lists = page === 1 ? [].concat(list) : state.get('posts').toJS().list.concat(list)
         return state.merge({
@@ -36,7 +19,7 @@ export const article = createReducer(initStates, {
             }
         })
     },
-    [RECEIVE_ARTICLE]: (state, action) => {
+    ['receiveCategoryItem']: (state, action) => {
         const {json: { data, prev, next }, pathname} = action
         return state.merge({
             article: {
@@ -47,7 +30,7 @@ export const article = createReducer(initStates, {
             }
         })
     },
-    [RECEIVE_COMMENT]: (state, action) => {
+    ['insertCategoryItem']: (state, action) => {
         const {json: { data: {list, hasNext} }, page, pathname} = action
         const lists = page === 1 ? [].concat(list) : state.get('comment').toJS().list.concat(list)
         return state.merge({
@@ -59,7 +42,7 @@ export const article = createReducer(initStates, {
             }
         })
     },
-    [POST_COMMENT]: (state, action) => {
+    ['updateCategoryItem']: (state, action) => {
         const lists = action.data.concat(state.get('comment').toJS().list)
         return state.mergeDeep({
             comment: {

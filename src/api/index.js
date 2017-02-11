@@ -1,52 +1,71 @@
-/* global $ */
+import axios from 'axios'
+import qs from 'qs'
 import NProgress from 'nprogress'
-import config from '../config'
+import config from './config'
 
-$.ajaxSetup({
-    global: true,
-    dataType: 'json',
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Basic dGVzdDpwYXNzd2Q='
-    }
-})
-
-$(document).ajaxStart(function() {
+axios.interceptors.request.use(config => {
     NProgress.start()
+    return config
+}, error => {
+    return Promise.reject(error)
 })
-$(document).ajaxComplete(function() {
+
+axios.interceptors.response.use(response => {
     NProgress.done()
+    return response
+}, error => {
+    NProgress.done()
+    //store.dispatch('global/showMsg', error.toString())
+    return Promise.reject(error)
 })
+
+function checkStatus(response) {
+    if (response.status === 200 || response.status === 304) {
+        return response
+    }
+    return {
+        data: {
+            code: -400,
+            message: response.statusText
+        }
+    }
+}
+
+function checkCode(res) {
+    if (res.data.code === -500) {
+        window.location.href = '/backend'
+        return
+    } else if (res.data.code === -400) {
+        window.location.href = '/'
+        return
+    } else if (res.data.code !== 200) {
+        return Promise.reject(res.data.message)
+    }
+    return res
+}
 
 export default {
-    get(url, data, global = true) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: config.api + url,
-                type: 'get',
-                data,
-                global
-            }).then(data => {
-                if (data.code === 200) resolve(data)
-                else reject(data.message)
-            }, error => {
-                reject(error.responseText || error.statusText)
-            })
-        })
+    post(url, data) {
+        return axios({
+            method: 'post',
+            url: config.api + url,
+            data: qs.stringify(data),
+            timeout: config.timeout,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        }).then(checkStatus).then(checkCode)
     },
-    post(url, data, global = true) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: config.api + url,
-                type: 'post',
-                data,
-                global
-            }).then(data => {
-                if (data.code === 200) resolve(data)
-                else reject(data.message)
-            }, error => {
-                reject(error.responseText || error.statusText)
-            })
-        })
-    },
+    get(url, params) {
+        return axios({
+            method: 'get',
+            url: config.api + url,
+            params,
+            timeout: config.timeout,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        }).then(checkStatus).then(checkCode)
+    }
 }
