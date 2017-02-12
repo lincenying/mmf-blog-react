@@ -22,17 +22,17 @@ var config = merge(baseWebpackConfig, {
             'process.env.NODE_ENV': '"development"'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ["vendor"]
-        }),
+        new webpack.NamedModulesPlugin(),
+        // prints more readable module names in the browser console on HMR updates
+        new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
-            chunks: ['vendor', 'app'],
+            chunks: ['app'],
             filename: 'index.html',
             template: 'src/template/index.html',
             inject: true
         }),
         new HtmlWebpackPlugin({
-            chunks: ['vendor', 'login'],
+            chunks: ['login'],
             filename: 'login.html',
             template: 'src/template/login.html',
             inject: true
@@ -41,7 +41,7 @@ var config = merge(baseWebpackConfig, {
 })
 
 Object.keys(config.entry).forEach(function(name) {
-    config.entry[name] = ['./config/dev-client'].concat(config.entry[name])
+    config.entry[name] = ['react-hot-loader/patch', 'webpack-hot-middleware/client?reload=true&noInfo=false'].concat(config.entry[name])
 })
 
 module.exports = config

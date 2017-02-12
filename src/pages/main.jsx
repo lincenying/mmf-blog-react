@@ -4,9 +4,11 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import ls from 'store2'
 import {propTypes} from '../decorators'
-import {fetchPosts} from 'alias-store-actions'
+import actions from 'alias-store-actions'
 import {MainItem} from "../components/main-item.jsx"
 import {Footer} from '../components/footer.jsx'
+
+const {fetchPosts} = actions
 
 function mapStateToProps(state) {
     return {
