@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {immutableRenderDecorator} from 'react-immutable-render-mixin'
 import Link from 'react-router/lib/Link'
 import {propTypes} from '../decorators'
-import {deleteArticle, recoverArticle, fetchAdminPosts} from 'alias-store-actions'
+import {deleteArticle, recoverArticle, fetchAdminPosts} from 'alias-store-actions/admin'
 
 function mapStateToProps(state) {
     return {

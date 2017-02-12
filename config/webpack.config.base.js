@@ -22,8 +22,7 @@ var config = {
         ],
         login: [
             path.join(srcPath, 'login.jsx')
-        ],
-        vendor: [ 'react', 'react-addons-css-transition-group', 'react-dom', 'react-immutable-render-mixin', 'react-router-redux', 'react-redux', 'react-toastr', 'redux', 'redux-form', 'redux-immutablejs', 'immutable', './src/polyfill']
+        ]
     },
     output: {
         path: buildPath,
